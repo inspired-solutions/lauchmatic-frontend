@@ -1,0 +1,10 @@
+/* @styled-jsx=global */
+:root * {
+  box-sizing: border-box !important;
+  font-family: 'Poppins', sans-serif;
+  &[tabindex="0"]{
+    outline: none !important;
+  }
+}
+
+

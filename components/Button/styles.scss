@@ -1,0 +1,85 @@
+@mixin generateStyle($background-color, $color) {
+  border: 1px solid $color;
+  background-color: $background-color;
+  color: $color;
+}
+
+.c-button {
+  height: 40px;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-family: "Poppins", sans-serif !important;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.c-button--contained {
+}
+.c-button--outlined {
+}
+
+.c-button--contained.c-button--primary {
+  @include generateStyle(var(--color-primary), var(--color-light));
+}
+.c-button--contained.c-button--secondary {
+  @include generateStyle(var(--color-secondary), var(--color-light));
+}
+.c-button--contained.c-button--disabled {
+  @include generateStyle(var(--color-grey), var(--color-light));
+}
+.c-button--contained.c-button--light {
+  @include generateStyle(var(--color-light), var(--color-dark));
+}
+.c-button--contained.c-button--dark {
+  @include generateStyle(var(--color-dark), var(--color-light));
+}
+.c-button--contained.c-button--info {
+  @include generateStyle(var(--color-info), var(--color-light));
+}
+.c-button--contained.c-button--success {
+  @include generateStyle(var(--color-success), var(--color-light));
+}
+.c-button--contained.c-button--success-light {
+  @include generateStyle(var(--color-success-light), var(--color-light));
+}
+.c-button--contained.c-button--grey {
+  @include generateStyle(var(--color-grey), var(--color-light));
+}
+.c-button--contained.c-button--grey-light {
+  @include generateStyle(var(--color-grey-light), var(--color-light));
+}
+
+.c-button--outlined.c-button--primary {
+  @include generateStyle(var(--color-light), var(--color-primary));
+}
+.c-button--outlined.c-button--secondary {
+  @include generateStyle(var(--color-light), var(--color-secondary));
+}
+.c-button--outlined.c-button--disabled {
+  @include generateStyle(var(--color-light), var(--color-gray));
+}
+.c-button--outlined.c-button--light {
+  @include generateStyle(var(--color-dark), var(--color-light));
+}
+.c-button--outlined.c-button--dark {
+  @include generateStyle(var(--color-light), var(--color-dark));
+}
+.c-button--outlined.c-button--info {
+  @include generateStyle(var(--color-light), var(--color-info));
+}
+.c-button--outlined.c-button--success {
+  @include generateStyle(var(--color-light), var(--color-success));
+}
+.c-button--outlined.c-button--success-light {
+  @include generateStyle(var(--color-light), var(--color-success-light));
+}
+.c-button--outlined.c-button--grey {
+  @include generateStyle(var(--color-light), var(--color-grey));
+}
+.c-button--outlined.c-button--grey-light {
+  @include generateStyle(var(--color-light), var(--color-grey-light));
+}

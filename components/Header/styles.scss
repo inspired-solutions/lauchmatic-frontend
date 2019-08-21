@@ -1,0 +1,10 @@
+.c-header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 23px;
+    padding-right: 26px;
+    align-items: center;
+    width: 100%;
+    height: var( --header-height );
+    border-bottom: 1px solid var(--color-grey-light);
+}

@@ -1,0 +1,43 @@
+.c-icon{
+
+}
+.c-icon--button{
+    cursor: pointer;
+}
+.c-icon--primary{
+    fill: var(--color-primary);
+}
+.c-icon--secondary{
+    fill: var(--color-secondary);
+}
+.c-icon--light{
+    fill: var(--color-light);
+}
+.c-icon--dark{
+    fill: var(--color-dark);
+}
+.c-icon--info{
+    fill: var(--color-info);
+}
+.c-icon--success{
+    fill: var(--color-success);
+}
+.c-icon--success-light{
+    fill: var(--color-success-light);
+}
+.c-icon--text-secondary{
+    fill: var(--color-grey);
+}
+
+.c-icon--small{
+    width: 12px;
+    height: 12px;
+}
+.c-icon--medium{
+    width: 24px;
+    height: 24px;
+}
+.c-icon--large{
+    width: 32px;
+    height: 32px;
+}

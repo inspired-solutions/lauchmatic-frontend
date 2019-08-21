@@ -1,0 +1,28 @@
+@mixin setStyle($background, $color){
+    background-color: $background;
+    color: $color;
+}
+.c-tooltip-container{
+    width: max-content;
+    position: absolute;
+    z-index: 1006;
+    top: 0;
+    left: calc( var(--side-bar-width) - 16px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.c-tooltip{
+    width: max-content;
+    padding: 18px 25px 18px 25px;
+    /**for while, its must dynamics*/
+    border: none;
+    border-radius: 8px;
+    @include setStyle(var(--color-secondary), var(--color-light));
+}
+.c-tooltip--left-indicator{
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-secondary);
+    clip-path: polygon(100% 0, 0 53%, 100% 100%);
+}

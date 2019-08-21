@@ -1,0 +1,34 @@
+@mixin gradientColorPicker{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 3px solid var(--color-light);
+    outline: none;
+    cursor: pointer;
+}
+.c-gradient-picker{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    width: 100%;
+    &__color-left{
+        @include gradientColorPicker();
+        left: 0;
+    }
+    &__color-right{
+        @include gradientColorPicker();
+        right: 0;
+    }
+    &__gradient-color{
+        height: 17px;
+        width: 100%;
+        margin: 0px 5px;
+        border-radius: 15px;
+    }
+    &__color--selected{
+        box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+    }
+}

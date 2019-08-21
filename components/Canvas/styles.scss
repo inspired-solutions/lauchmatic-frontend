@@ -1,0 +1,37 @@
+.c-canvas{
+    position: relative;
+    margin-left: 98px;
+    margin-top: 98px;
+    width: 804px;
+    height: 478px;
+    background-color: var(--color-light);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    // overflow: hidden;
+}
+.c-canvas--moved{
+    margin-left: calc( 98px + var(--menu-options-width));
+}
+.c-canvas__title{
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  cursor: pointer;
+  &:focus{
+    outline: 1px solid dodgerblue !important;
+  }
+}
+.c-canvas--cursor-cross-hair{
+    cursor: crosshair;
+}
+.c-canvas--no-template{
+    width: 256px;
+    height: 478px;
+    border: 1px dashed  var(--color-grey-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}

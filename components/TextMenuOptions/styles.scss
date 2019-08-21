@@ -1,0 +1,16 @@
+.c-text-menu-options{
+    padding: 24px;
+}
+.c-text-menu-options__selects-container{
+    display: flex;
+    justify-content: space-between;
+}
+.c-text-menu-options__color-picker{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.c-text-menu-options__color-picker-inputs{
+    display: flex;
+    justify-content: space-between;
+}
