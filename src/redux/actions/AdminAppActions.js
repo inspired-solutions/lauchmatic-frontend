@@ -1,26 +1,26 @@
-import AdminAppTypes from '../../redux/types/AdminAppTypes'
+import AdminAppTypes from "../types/AdminAppTypes";
 
 const AdminAppAction = {
   setSelectedModule: selectedModule => ({
     type: AdminAppTypes.ADMIN_SET_SELECTED_MODULE,
-    payload: selectedModule,
+    payload: selectedModule
   }),
   setDeviceThumbnail: deviceThumbnail => ({
     type: AdminAppTypes.ADMIN_SET_DEVICE_THUMBNAIL,
-    payload: deviceThumbnail,
+    payload: deviceThumbnail
   }),
   setScreenType: screenType => ({
     type: AdminAppTypes.ADMIN_SET_SCREEN_TYPE,
-    payload: screenType,
+    payload: screenType
   }),
   setSelectedDevice: device => ({
     type: AdminAppTypes.ADMIN_SET_SELECTED_DEVICE,
-    payload: device,
+    payload: device
   }),
   setSelectedText: device => ({
     type: AdminAppTypes.ADMIN_SET_SELECTED_TEXT,
-    payload: device,
-  }),
-}
+    payload: device
+  })
+};
 
-export default AdminAppAction
+export default AdminAppAction;

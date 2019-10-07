@@ -1,12 +1,12 @@
-import AdminTemplateTypes from '../../redux/types/AdminTemplatesTypes'
-import templateService from '../../services/template.service'
-import textService from '../../services/text.service'
+import AdminTemplateTypes from "../types/AdminTemplatesTypes";
+import templateService from "../../template.service";
+import textService from "../../text.service";
 
 const AdminTemplateAction = {
   getAdminTemplates: () => async dispatch => {
     // tryca
     try {
-      const response = await templateService.getAdminTemplates()
+      const response = await templateService.getAdminTemplates();
       const templates = response.map(template => ({
         ...template,
         devices: template.devices.map(device => ({
@@ -23,7 +23,7 @@ const AdminTemplateAction = {
           width: Number(device.width),
           height: Number(device.height),
           x: Number(device.x),
-          y: Number(device.y),
+          y: Number(device.y)
         })),
         texts_list: template.texts_list.map(text => ({
           ...text,
@@ -38,28 +38,34 @@ const AdminTemplateAction = {
           width: Number(text.width),
           height: Number(text.height),
           x: Number(text.x),
-          y: Number(text.y),
-        })),
-      }))
+          y: Number(text.y)
+        }))
+      }));
 
-      const templatesOneScreen = templates.filter(template => template.screen_quantity === 1)
-      const templatesTwoScreen = templates.filter(template => template.screen_quantity === 2)
-      const templatesThreeScreen = templates.filter(template => template.screen_quantity === 3)
+      const templatesOneScreen = templates.filter(
+        template => template.screen_quantity === 1
+      );
+      const templatesTwoScreen = templates.filter(
+        template => template.screen_quantity === 2
+      );
+      const templatesThreeScreen = templates.filter(
+        template => template.screen_quantity === 3
+      );
 
       dispatch({
         type: AdminTemplateTypes.ADMIN_LOAD_TEMPLATES_ONE_SCREEN,
-        payload: templatesOneScreen,
-      })
+        payload: templatesOneScreen
+      });
       dispatch({
         type: AdminTemplateTypes.ADMIN_LOAD_TEMPLATES_TWO_SCREEN,
-        payload: templatesTwoScreen,
-      })
+        payload: templatesTwoScreen
+      });
       dispatch({
         type: AdminTemplateTypes.ADMIN_LOAD_TEMPLATES_THREE_SCREEN,
-        payload: templatesThreeScreen,
-      })
+        payload: templatesThreeScreen
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
@@ -67,21 +73,25 @@ const AdminTemplateAction = {
     /**because use uuid() for set id before dave in firestore and after not is necesary */
     try {
       const { id: templateId } = await templateService.addTemplate({
-        ...template,
-      })
+        ...template
+      });
       await Promise.all([
-        ...devices.map(device => templateService.addTemplateDevice(templateId, device)),
-        ...texts.map(text => textService.addText({ ...text, template: templateId })),
-      ])
+        ...devices.map(device =>
+          templateService.addTemplateDevice(templateId, device)
+        ),
+        ...texts.map(text =>
+          textService.addText({ ...text, template: templateId })
+        )
+      ]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
   setTemplate: template => ({
     type: AdminTemplateTypes.ADMIN__SET_TEMPLATE,
-    payload: template,
-  }),
-}
+    payload: template
+  })
+};
 
-export default AdminTemplateAction
+export default AdminTemplateAction;

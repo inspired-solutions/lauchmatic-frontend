@@ -5,9 +5,9 @@ import { SCREENS_TYPE } from '../../common/constants/ScreensConstant'
 const initialState = {
   selectedModule: SELECTED_MODULE.TEMPLATES,
   seletedDevice: null,
-  deviceThumbnail: '',
+  deviceThumbnail: "",
   screenType: SCREENS_TYPE[0].value,
-  selectedText: {},
+  selectedText: {}
 };
 
 export default (state = initialState, action) => {
@@ -15,30 +15,30 @@ export default (state = initialState, action) => {
     case AdminAppTypes.ADMIN_SET_SELECTED_MODULE:
       return {
         ...state,
-        selectedModule: action.payload,
-      }
+        selectedModule: action.payload
+      };
     case AdminAppTypes.ADMIN_SET_SCREEN_TYPE:
       return {
         ...state,
-        screenType: action.payload,
-      }
+        screenType: action.payload
+      };
     case AdminAppTypes.ADMIN_SET_DEVICE_THUMBNAIL:
       return {
         ...state,
-        deviceThumbnail: action.payload,
-      }
+        deviceThumbnail: action.payload
+      };
     case AdminAppTypes.ADMIN_SET_SELECTED_DEVICE:
       return {
         ...state,
-        seletedDevice: action.payload,
-      }
+        seletedDevice: action.payload
+      };
     case AdminAppTypes.ADMIN_SET_SELECTED_TEXT:
       return {
         ...state,
-        selectedText: action.payload,
-      }
+        selectedText: action.payload
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};

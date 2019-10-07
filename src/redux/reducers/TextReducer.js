@@ -3,7 +3,7 @@ import TextTypes from '../types/TextTypes'
 const initialState = {
   selectedText: null,
   isDraggable: false,
-  list: [],
+  list: []
 };
 
 export default (state = initialState, action) => {
@@ -11,17 +11,17 @@ export default (state = initialState, action) => {
     case TextTypes.SET_EDITING_TEXT:
       return {
         ...state,
-        selectedText: action.payload,
+        selectedText: action.payload
       };
     case TextTypes.SET_DRAGGABLE:
       return {
         ...state,
-        isDraggable: action.payload,
+        isDraggable: action.payload
       };
     case TextTypes.ADD_TEXT:
       return {
         ...state,
-        list: [...state.list, action.payload],
+        list: [...state.list, action.payload]
       };
 
     case TextTypes.UPDATE_TEXT:
@@ -29,21 +29,21 @@ export default (state = initialState, action) => {
         ...state,
         list: state.list.map(text =>
           text.id === action.payload.id ? { ...text, ...action.payload } : text
-        ),
+        )
       };
     case TextTypes.DELETE_TEXT:
       return {
         ...state,
-        list: state.list.filter(text => text.id !== action.payload.id),
+        list: state.list.filter(text => text.id !== action.payload.id)
       };
     case TextTypes.RESET_TEXTS_STATE:
-      return initialState
+      return initialState;
     case TextTypes.LOAD_TEXTS:
       return {
         ...state,
-        list: action.payload,
-      }
+        list: action.payload
+      };
     default:
-      return state
+      return state;
   }
-}
+};

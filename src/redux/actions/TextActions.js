@@ -1,60 +1,59 @@
-import TextTypes from '../types/TextTypes'
-import ImagesTypes from '../../redux/types/ImagesTypes'
-import textService from '../../services/text.service'
-import TemplateTypes from '@redux/types/TemplateTypes'
+import TextTypes from "../types/TextTypes";
+import ImagesTypes from "../types/ImagesTypes";
+import textService from "../../text.service";
 
 const TextActions = {
   addText: text => async dispatch => {
     try {
-      const { id } = await textService.addText(text)
+      const { id } = await textService.addText(text);
       dispatch({
         type: TextTypes.SET_EDITING_TEXT,
-        payload: id,
-      })
+        payload: id
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
   updateText: text => async dispatch => {
     try {
-      await textService.updateText(text)
+      await textService.updateText(text);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
   deleteText: text => async dispatch => {
     try {
-      await textService.deleteText(text)
+      await textService.deleteText(text);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 
   setSelectedText: text => async dispatch => {
     dispatch({
       type: ImagesTypes.SET_IMAGE_CANVAS_SELECTED,
-      payload: null,
-    })
+      payload: null
+    });
     dispatch({
       type: TextTypes.SET_EDITING_TEXT,
-      payload: text,
-    })
+      payload: text
+    });
   },
 
   setDraggable: draggable => ({
     type: TextTypes.SET_DRAGGABLE,
-    payload: draggable,
+    payload: draggable
   }),
 
   resetTextState: () => ({
-    type: TextTypes.RESET_TEXTS_STATE,
+    type: TextTypes.RESET_TEXTS_STATE
   }),
   loadTexts: texts => ({
     type: TextTypes.LOAD_TEXTS,
-    payload: texts,
-  }),
-}
+    payload: texts
+  })
+};
 
-export default TextActions
+export default TextActions;

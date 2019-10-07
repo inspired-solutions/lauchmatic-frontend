@@ -1,38 +1,38 @@
-import AppTypes from '../../redux/types/AppTypes'
+import AppTypes from "../types/AppTypes";
 
 const AppActions = {
   setLoading: loading => ({
     type: AppTypes.LOADING,
-    payload: loading,
+    payload: loading
   }),
 
   setSelectedModule: module => ({
     type: AppTypes.SET_SELECTED_MODULE,
-    payload: module,
+    payload: module
   }),
 
   setCurrentDesign: design => ({
     type: AppTypes.SET_CURRENT_DESIGN,
-    payload: design,
+    payload: design
   }),
 
   setCurrentTemplate: template => ({
     type: AppTypes.SET_CURRENT_TEMPLATE,
-    payload: template,
+    payload: template
   }),
 
   setMenuMessage: message => ({
     type: AppTypes.SET_MENU_MESSAGE,
-    payload: message,
+    payload: message
   }),
   setSaving: saving => ({
     type: AppTypes.SET_SAVING,
-    payload: saving,
+    payload: saving
   }),
   setThumbnail: thumbnail => ({
     type: AppTypes.SET_THUMBNAIL,
-    payload: thumbnail,
-  }),
-}
+    payload: thumbnail
+  })
+};
 
-export default AppActions
+export default AppActions;

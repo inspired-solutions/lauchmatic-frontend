@@ -5,10 +5,10 @@ const initialState = {
   loading: false,
   selectedModule: SELECTED_MODULE.NONE,
   currentDesign: null,
-  currentTemplate: null,
-  thumbnail: '',
+  currentTemplate: {},
+  thumbnail: "",
   menuMessage: null,
-  saving: false,
+  saving: false
 };
 
 export default (state = initialState, action) => {
@@ -16,42 +16,42 @@ export default (state = initialState, action) => {
     case AppTypes.LOADING:
       return {
         ...state,
-        loading: action.payload,
+        loading: action.payload
       };
 
     case AppTypes.SET_SELECTED_MODULE:
       return {
         ...state,
-        selectedModule: action.payload,
+        selectedModule: action.payload
       };
 
     case AppTypes.SET_CURRENT_DESIGN:
       return {
         ...state,
-        currentDesign: action.payload,
+        currentDesign: action.payload
       };
     case AppTypes.SET_CURRENT_TEMPLATE:
       return {
         ...state,
-        currentTemplate: action.payload,
+        currentTemplate: action.payload
       };
     case AppTypes.SET_MENU_MESSAGE:
       return {
         ...state,
-        menuMessage: action.payload,
+        menuMessage: action.payload
       };
     case AppTypes.SET_SAVING:
       return {
         ...state,
-        saving: action.payload,
+        saving: action.payload
       };
     case AppTypes.SET_THUMBNAIL:
       return {
         ...state,
-        thumbnail: action.payload,
+        thumbnail: action.payload
       };
 
     default:
-      return state
+      return state;
   }
-}
+};

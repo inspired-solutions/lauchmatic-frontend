@@ -2,41 +2,43 @@ import AdminDevicesTypes from '../../redux/types/AdminDevicesTypes'
 
 const initialState = {
   listDevices: [],
-  listDevicesCanvas: [],
-}
+  listDevicesCanvas: []
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case AdminDevicesTypes.ADMIN_LOAD_DEVICES:
       return {
         ...state,
-        listDevices: action.payload,
-      }
+        listDevices: action.payload
+      };
     case AdminDevicesTypes.ADMIN_ADD_DEVICES:
       return {
         ...state,
-        listDevices: [...state.listDevices, action.payload],
-      }
+        listDevices: [...state.listDevices, action.payload]
+      };
 
     case AdminDevicesTypes.ADMIN_ADD_DEVICES_CANVAS:
       return {
         ...state,
-        listDevicesCanvas: [...state.listDevicesCanvas, action.payload],
-      }
+        listDevicesCanvas: [...state.listDevicesCanvas, action.payload]
+      };
 
     case AdminDevicesTypes.ADMIN_UPDATE_DEVICE_CANVAS:
       return {
         ...state,
         listDevicesCanvas: state.listDevicesCanvas.map(image =>
-          image.id === action.payload.id ? { ...image, ...action.payload } : image
-        ),
-      }
+          image.id === action.payload.id
+            ? { ...image, ...action.payload }
+            : image
+        )
+      };
     case AdminDevicesTypes.ADMIN_RESET_DEVICES_CANVAS:
       return {
         ...state,
-        listDevicesCanvas: [],
-      }
+        listDevicesCanvas: []
+      };
     default:
-      return state
+      return state;
   }
-}
+};
