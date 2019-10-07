@@ -1,0 +1,11 @@
+const AdminTextsTypes = {
+  ADMIN_ADD_TEXT: 'ADMIN_ADD_TEXT',
+
+  ADMIN_UPDATE_TEXT: 'ADMIN_UPDATE_TEXT',
+
+  ADMIN_DELETE_TEXT: 'ADMIN_DELETE_TEXT',
+
+  ADMIN_RESET_TEXTS: 'ADMIN_RESET_TEXTS',
+}
+
+export default AdminTextsTypes

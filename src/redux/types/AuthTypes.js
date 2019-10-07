@@ -1,0 +1,8 @@
+const AuthTypes = {
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_ERROR: 'LOGIN_ERROR',
+  LOGOUT: 'LOGOUT',
+  REFRESH_TOKEN: 'REFRESH_TOKEN'
+};
+
+export default AuthTypes;

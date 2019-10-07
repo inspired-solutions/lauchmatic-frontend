@@ -1,0 +1,15 @@
+.l-layout-admin__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.l-layout-admin__main {
+  margin-left: var( --side-bar-width );
+  height: 100vh;
+  padding: 16px;
+  background-color: var(--color-background);
+  overflow-y: auto;
+  overflow-x: hidden;
+}

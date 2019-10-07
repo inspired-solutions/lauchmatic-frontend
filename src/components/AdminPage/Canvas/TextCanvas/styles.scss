@@ -1,0 +1,14 @@
+.c-text-canvas{
+    position: absolute;
+    background: transparent;
+    outline: none;
+    min-width: 20;
+    border: none;
+}
+.c-text-canvas--selected{
+    border: 1px solid #548AF2;
+}
+.c-text-canvas--draggable{
+    border: 1px dotted #548AF2;
+    cursor: pointer;
+}

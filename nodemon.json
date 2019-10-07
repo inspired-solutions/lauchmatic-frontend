@@ -1,5 +1,0 @@
-{
-  "ignore": ["*.test.js", "node_modules/*"],
-  "exec": "next",
-  "watch": ["server", "static","next.config.js"]
-}

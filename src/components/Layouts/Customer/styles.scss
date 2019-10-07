@@ -1,0 +1,16 @@
+.l-layout-customer__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.l-layout-customer__main {
+  position: fixed;
+  top: var(--header-height);
+  left: var( --side-bar-width );
+  // margin-left: var( --side-bar-width );
+  height: calc( 100vh - var(--header-height));
+  background-color: var(--color-background);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
