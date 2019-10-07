@@ -46,6 +46,8 @@ function Canvas({
       const imageCanvasPosition = {
         left: Number((left - item.image.left).toFixed(2)),
         top: Number((top - item.image.top).toFixed(2)),
+        x: Number((left - item.image.left).toFixed(2)),
+        y: Number((top - item.image.top).toFixed(2)),
       }
       addDevicesCanvas({
         ...item.image,

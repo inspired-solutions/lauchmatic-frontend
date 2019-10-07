@@ -63,7 +63,7 @@ function ImageCanvas({
             top: Number(node.y().toFixed(2)),
             width: Number((node.width() * scaleX).toFixed(2)),
             height: Number((node.height() * scaleY).toFixed(2)),
-            rotation: Number((node.rotation() * scaleY).toFixed(2))
+            rotation: Number((node.rotation()).toFixed(2))
           });
         }}
         onClick={async e => {
@@ -95,7 +95,7 @@ function ImageCanvas({
             top: Number(node.y().toFixed(2)),
             width: Number((node.width() * scaleX).toFixed(2)),
             height: Number((node.height() * scaleY).toFixed(2)),
-            rotation: Number((node.rotation() * scaleY).toFixed(2))
+            rotation: Number((node.rotation()).toFixed(2))
           });
           // updateImageCanvas({
           //   ...image,

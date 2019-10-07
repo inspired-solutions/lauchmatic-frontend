@@ -24,8 +24,8 @@ function ImageCanvas({ image, selected, setSelectedDevice, updateDeviceCanvas })
       <Image
         ref={shapeRef}
         image={imageLoaded}
-        x={image.left}
-        y={image.top}
+        x={image.x}
+        y={image.y}
         width={image.width}
         height={image.height}
         draggable
@@ -55,9 +55,11 @@ function ImageCanvas({ image, selected, setSelectedDevice, updateDeviceCanvas })
             ...image,
             x: node.x(),
             y: node.y(),
+            left: node.x(),
+            top: node.y(),
             width: (node.width() * scaleX).toFixed(2),
             height: (node.height() * scaleY).toFixed(2),
-            rotation,
+            rotation: Number((node.rotation()).toFixed(2)),
             scaleX,
             scaleY,
             skewX,
@@ -79,14 +81,16 @@ function ImageCanvas({ image, selected, setSelectedDevice, updateDeviceCanvas })
             ...image,
             x: node.x(),
             y: node.y(),
+            left: node.x(),
+            top: node.y(),
             width: (node.width() * scaleX).toFixed(2),
             height: (node.height() * scaleY).toFixed(2),
             rotation,
             scaleX,
             scaleY,
             skewX,
-            skewY,
-          })
+            skewY
+          });
         }}
       />
     </>
