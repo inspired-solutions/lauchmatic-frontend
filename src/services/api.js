@@ -1,6 +1,7 @@
 import axios from "axios";
 import configureStore from "../redux/store";
-const { persistor, store } = configureStore();
+import authAction from "./../redux/actions/AuthActions";
+const { store } = configureStore();
 
 const BASE_URL = "http://launchmatic-backend.inspiredsolutions.pe";
 
@@ -33,6 +34,7 @@ api.interceptors.response.use(
   error => {
     console.log("Http response", error.response);
     if (error.response.status === 401) {
+      // store.dispatch(authAction.logout());
       console.log("Unauthorized!");
     }
 

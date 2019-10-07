@@ -58,12 +58,14 @@ import LayoutCustomer from "./../../components/Layouts/Customer";
 import AdminDeviceThumbnailAction from "./../.../../../redux/actions/AdminDeviceThumbnailAction";
 import ThumbnailSelect from "./../../components/CustomerPage/ThumbnailSelect";
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Redirect } from "react-router-dom";
 
 function Home({
   selectedModule,
   selectedText,
   getDeviceThumbnails,
-  getCustomerTemplates
+  getCustomerTemplates,
+  auth,
 }) {
   const panzoomRef = useRef(null);
   useEffect(() => {
@@ -87,6 +89,15 @@ function Home({
     getDeviceThumbnails();
     getCustomerTemplates();
   }, []);
+  if (auth.is_superuser) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/admin"
+        }}
+      />
+    );
+  }
   return (
     <LayoutCustomer>
       <div
@@ -130,7 +141,8 @@ function Home({
 
 const mapStateToProps = state => ({
   selectedModule: state.app.selectedModule,
-  selectedText: state.texts.selectedText
+  selectedText: state.texts.selectedText,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {

@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { Redirect, withRouter } from 'react-router-dom';
-import { Container, Card, Button, Form, Alert } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import AppActions from '../../../redux/actions/AppActions';
-import AuthActions from '../../../redux/actions/AuthActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
+import { Redirect, withRouter } from "react-router-dom";
+import { Container, Card, Button, Form, Alert } from "react-bootstrap";
+import PropTypes from "prop-types";
+import AppActions from "../../../redux/actions/AppActions";
+import AuthActions from "../../../redux/actions/AuthActions";
 
 class LoginPage extends Component {
   state = {
-    username: '',
-    password: '',
-    showAlert: false,
+    username: "",
+    password: "",
+    showAlert: false
   };
 
   handleSubmit = async event => {
@@ -26,14 +26,15 @@ class LoginPage extends Component {
 
       if (status === 200) {
         const { is_superuser } = data;
-        const route = is_superuser ? '/admin' : '/';
-
-        this.props.history.push(route);
+        const route = is_superuser ? "/admin" : "/";
+        /**temp, after modifed api.js file */
+        window.location.reload();
+        // this.props.history.push(route);
       } else {
         this.setShow(true);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -57,21 +58,29 @@ class LoginPage extends Component {
     const { token, is_superuser } = auth;
 
     if (token) {
-      const route = is_superuser ? '/admin' : '/';
+      const route = is_superuser ? "/admin" : "/";
 
-      return <Redirect to={route} />
+      return <Redirect to={route} />;
     }
 
     return (
       <Container>
-        <Card style={{
-          width: 350,
-          position: 'absolute', left: '50%', top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}>
+        <Card
+          style={{
+            width: 350,
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)"
+          }}
+        >
           <Card.Body>
-            { showAlert && (
-              <Alert variant="danger" onClose={() => this.setShow(false)} dismissible>
+            {showAlert && (
+              <Alert
+                variant="danger"
+                onClose={() => this.setShow(false)}
+                dismissible
+              >
                 Incorrect credentials!
               </Alert>
             )}
@@ -111,22 +120,25 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => ({
   loading: state.app.loading,
-  auth: state.auth,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {
   setLoading: AppActions.setLoading,
-  login: AuthActions.login,
+  login: AuthActions.login
 };
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(LoginPage);
 
 LoginPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   setLoading: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };

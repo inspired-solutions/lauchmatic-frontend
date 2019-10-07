@@ -3,6 +3,8 @@ import templateService from "../../services/template.service";
 import AppTypes from "../types/AppTypes";
 import TextTypes from "../types/TextTypes";
 import { COLOR_FILL_TYPE } from "../../common/constants/BackgroundConstant";
+import configureStore from "../../redux/store";
+const { store } = configureStore();
 
 const TemplateAction = {
   loadTemplateOneScreen: templates => ({
@@ -32,7 +34,8 @@ const TemplateAction = {
 
   getCustomerTemplates: () => async dispatch => {
     try {
-      const userId = localStorage.getItem("userId");
+      const userId = store.getState().auth.id;
+
       const response = await templateService.getCustomerTemplates(userId);
       const templates = response.map(template => ({
         ...template,

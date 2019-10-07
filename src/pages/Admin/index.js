@@ -32,6 +32,7 @@ import Select from "./../../components/Select";
 import Canvas from "./../../components/AdminPage/Canvas";
 import AdminDevicesAction from "./../../redux/actions/AdminDeviceActions";
 import AdminTextAction from "./../../redux/actions/AdminTextActions";
+import { Redirect } from "react-router-dom";
 
 // const LayoutAdmin = dynamic(() => import('@components/Layouts/Admin'))
 // const Button = dynamic(() => import('@components/Button'))
@@ -52,7 +53,8 @@ function Admin({
   addTemplate,
   resetDevicesCanvas,
   texts,
-  resetText
+  resetText,
+  auth,
 }) {
   useEffect(() => {
     getDeviceThumbnails();
@@ -92,7 +94,15 @@ function Admin({
       console.log(error);
     }
   };
-
+  if (!auth.is_superuser) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
   return (
     <LayoutAdmin>
       <Canvas />
@@ -221,7 +231,8 @@ const mapStateToProps = state => ({
   deviceThumbnail: state.adminApp.deviceThumbnail,
   screenType: state.adminApp.screenType,
   devicesCanvas: state.adminDevice.listDevicesCanvas,
-  texts: state.adminText.list
+  texts: state.adminText.list,
+  auth: state.auth,
 });
 const mapDispatchToProps = {
   setDeviceThumbnail: AdminAppAction.setDeviceThumbnail,
@@ -230,7 +241,7 @@ const mapDispatchToProps = {
   addTemplate: AdminTemplateAction.addTemplate,
   getDeviceThumbnails: AdminDeviceThumbnailAction.getDeviceThumbnails,
   resetDevicesCanvas: AdminDevicesAction.resetDevicesCanvas,
-  resetText: AdminTextAction.resetText
+  resetText: AdminTextAction.resetText,
 };
 
 export default compose(
