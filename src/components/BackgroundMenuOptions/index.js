@@ -56,31 +56,33 @@ function BackgroundMenuOptions({
     currentTemplate.id
   );
   const {
-    type = COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR,
-    background = {
-      id: 0,
-      value: {
-        hex: "",
-        opacity: "",
-        gradient: "",
-        imageUrl: ""
+    background_color: {
+      type = COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR,
+      background = {
+        id: 0,
+        value: {
+          hex: "",
+          opacity: "",
+          gradient: "",
+          imageUrl: ""
+        }
+      },
+      gradientColorStart = {
+        id: 0,
+        value: {
+          hex: "",
+          opacity: ""
+        }
+      },
+      gradientColorEnd = {
+        id: 0,
+        value: {
+          hex: "",
+          opacity: ""
+        }
       }
-    },
-    gradientColorStart = {
-      id: 0,
-      value: {
-        hex: "",
-        opacity: ""
-      }
-    },
-    gradientColorEnd = {
-      id: 0,
-      value: {
-        hex: "",
-        opacity: ""
-      }
-    }
-  } = templateSelected.background_color;
+    } = {}
+  } = templateSelected;
 
   const updateTemplateCallBack = useCallback(
     _debounce(template => updateTemplate(template), 2000),
