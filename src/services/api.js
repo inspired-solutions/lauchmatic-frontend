@@ -1,7 +1,6 @@
 import axios from "axios";
-import configureStore from "../redux/store";
+// import configureStore from "../redux/store";
 import authAction from "./../redux/actions/AuthActions";
-const { store } = configureStore();
 
 const BASE_URL = "http://launchmatic-backend.inspiredsolutions.pe";
 
@@ -12,8 +11,9 @@ const api = axios.create({
 api.interceptors.request.use(
   request => {
     try {
-      const token = store.getState().auth.token;
-
+      const { token } = JSON.parse(
+        JSON.parse(localStorage.getItem("persist:root")).auth
+      );
       if (token) {
         request.headers.Authorization = `JWT ${token}`;
       }

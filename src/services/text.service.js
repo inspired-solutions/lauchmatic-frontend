@@ -5,7 +5,17 @@ function addText(text) {
 }
 
 function updateText(text) {
-  return api.patch(`/api/v1/texts/${text.id}/`, text).then(({ data }) => data);
+  /**why, for fix fast */
+  const { token } = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:root")).auth
+  );
+  return api
+    .patch(`/api/v1/texts/${text.id}/`, text, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+    .then(({ data }) => data);
 }
 function deleteText(text) {
   return api.delete(`/api/v1/texts/${text.id}/`).then(({ data }) => data);
