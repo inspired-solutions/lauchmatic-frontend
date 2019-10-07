@@ -189,7 +189,7 @@ class TemplateMenuOptions extends React.Component {
                       position: "absolute",
                       top: 0,
                       right: 0,
-                      zIndex: 2004
+                      zIndex: 3,
                     }}
                   >
                     <Button
@@ -255,7 +255,7 @@ class TemplateMenuOptions extends React.Component {
                       position: "absolute",
                       top: 0,
                       right: 0,
-                      zIndex: 2004
+                      zIndex: 3,
                     }}
                   >
                     <Button
@@ -321,7 +321,7 @@ class TemplateMenuOptions extends React.Component {
                       position: "absolute",
                       top: 0,
                       right: 0,
-                      zIndex: 2004
+                      zIndex: 3,
                     }}
                   >
                     <Button
