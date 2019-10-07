@@ -2,7 +2,7 @@ import React from 'react'
 
 import useImage from 'use-image'
 import PropTypes from 'prop-types'
-import IDevice from '@interfaces/IDevice'
+import IDevice from './../../../interfaces/IDevice'
 import { Image } from 'react-konva'
 
 function Device({ device }) {

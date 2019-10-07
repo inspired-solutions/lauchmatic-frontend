@@ -3,11 +3,11 @@ import './styles.scss'
 import classNames from 'classnames'
 
 import { connect } from 'react-redux'
-import AppActions from '@redux/actions/AppActions'
+import AppActions from './../../redux/actions/AppActions'
 import PropTypes from 'prop-types'
-import ITemplate from '@interfaces/ITemplate'
+import ITemplate from './../../interfaces/ITemplate'
 import { useDrag } from 'react-dnd'
-import IImage from '@interfaces/IImage'
+import IImage from './../../interfaces/IImage'
 // import ItemTypes from '@common/ItemTypes'
 
 function Image({
@@ -25,7 +25,7 @@ function Image({
   const [{ isDragging }, drag] = useDrag({
     item: { type: itemType },
     canDrag: () => {
-      return !!currentTemplate
+      return !!currentTemplate.id
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
@@ -43,7 +43,7 @@ function Image({
   })
 
   const handleClick = () => {
-    if (!currentTemplate) {
+    if (!currentTemplate.id) {
       setMenuMessage({
         menuOption: menuOptionOnAlert,
         message: messageOnAlert,

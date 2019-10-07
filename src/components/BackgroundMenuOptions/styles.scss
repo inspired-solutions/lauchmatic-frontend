@@ -1,4 +1,5 @@
 .c-background-menu-options{
+  position: relative;
     &__header{
         padding: 13px 36px 13px 30px;
         background-color: var(--color-light);
@@ -33,7 +34,7 @@
         justify-content: space-between;
         flex-wrap: wrap;
     }
-    
+
     &__content-gallery__color{
         margin-top: 13px;
         width: 158px;
@@ -41,6 +42,6 @@
         border-radius: 8px;
         cursor: pointer;
     }
-    
+
 
 }

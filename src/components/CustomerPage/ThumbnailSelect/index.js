@@ -3,9 +3,9 @@
 import React from 'react'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import AppActions from '@redux/actions/AppActions'
-import Select from '@components/Select'
-import Typography from '@components/Typography'
+import AppActions from './../../../redux/actions/AppActions'
+import Select from './../../Select'
+import Typography from './../../Typography'
 
 function ThumbnailSelect({ thumbnails, thumbnail, setThumbnail }) {
   return (

@@ -12,17 +12,20 @@ import {
   FONT_STYLES,
   FONT_SIZES,
   TEXT_ALIGN,
-} from '@common/constants/FontConstants'
+} from './../../common/constants/FontConstants'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
-import TextActions from '@redux/actions/TextActions'
+import TextActions from './../../redux/actions/TextActions'
 
 import ColorPicker from '../ColorPicker'
 import PropTypes from 'prop-types'
-import IText from '@interfaces/IText'
-import TemplateAction from '@redux/actions/TemplateAction'
-import TextHelpers from '@common/helpers/TextHelpers'
+import IText from './../../interfaces/IText'
+import TemplateAction from './../../redux/actions/TemplateAction'
+import TextHelpers from './../../common/helpers/TextHelpers'
+import { useStyletron } from 'baseui'
+
+import classNames from 'classnames'
 
 function TextMenuOptions({ updateText, updateTextTemplate, selectedText, texts, currentTemplate }) {
   const updateTextCallBack = useCallback(_debounce(text => updateText(text), 2000), [])
@@ -51,16 +54,48 @@ function TextMenuOptions({ updateText, updateTextTemplate, selectedText, texts, 
   const handleChangeColor = async value => {
     await updateTextTemplate(currentTemplate, { color: value, id: selectedText })
     updateTextCallBack.cancel()
-    await updateTextCallBack({ color: value, id: selectedText })
+    await updateTextCallBack({ color: JSON.stringify(value), id: selectedText })
   }
 
   const { font_family, font_size, text_align, font_style, color } = TextHelpers.getCurrentText(
     texts,
     selectedText
   )
-
+  const [css] = useStyletron()
   return (
-    <div className="c-text-menu-options">
+    <div
+      className={classNames([
+        css({
+          padding: '24px',
+          height: '100%',
+          position: 'relative',
+        }),
+      ])}
+    >
+      <div
+        className={css(
+          !selectedText || !currentTemplate
+            ? {
+                zIndex: 4,
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                position: 'absolute',
+                backgroundColor: 'var(--color-grey)',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                opacity: 0.5,
+                color: 'white',
+              }
+            : { display: 'none' }
+        )}
+      >
+        {!currentTemplate ? 'You must select a template' : 'No text is selected'}
+      </div>
       <div className="c-text-menu-options__selects-container">
         <div style={{ width: 230 }}>
           <Select

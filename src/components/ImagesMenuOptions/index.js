@@ -4,9 +4,9 @@ import Button from '../Button'
 import Image from '../Image/index'
 import { connect } from 'react-redux'
 import Typography from '../Typography'
-import { SELECTED_MODULE } from '@common/constants/SelectedModuleConstant'
-import { ItemTypes } from '@common/constants/ItemTypesConstant'
-import ImagesActions from '@redux/actions/ImagesActions'
+import { SELECTED_MODULE } from '../../common/constants/SelectedModuleConstant'
+import { ItemTypes } from '../../common/constants/ItemTypesConstant'
+import ImagesActions from './../../redux/actions/ImagesActions'
 import PropTypes from 'prop-types'
 
 class ImagesMenuOptions extends React.Component {

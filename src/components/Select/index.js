@@ -3,7 +3,7 @@ import React from 'react'
 import Typography from '../Typography'
 import './styles.scss'
 import classNames from 'classnames'
-import ExpandMoreIcon from '@svgs/expand_more.svg'
+import ExpandMoreIcon from './../../svgs/expand_more.svg'
 import Icon from '../Icon'
 import PropTypes from 'prop-types'
 

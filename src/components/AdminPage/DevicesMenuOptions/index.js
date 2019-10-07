@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ButtonGroup from '@components/ButtonGroup'
+import ButtonGroup from '../..//ButtonGroup'
 import CreateDevice from './CreateDevice'
 import AddDevices from './AddDevice'
 

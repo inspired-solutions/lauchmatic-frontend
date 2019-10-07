@@ -3,21 +3,20 @@ import './styles.scss'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import Select from '../Select'
-import { SCREENS_TYPE } from '@common/constants/ScreensConstant'
+import { SCREENS_TYPE } from './../../common/constants/ScreensConstant'
 import Icon from '../Icon'
-import DeviceIcon from '@svgs/device.svg'
+import DeviceIcon from './../../svgs/device.svg'
 import ButtonGroup from '../ButtonGroup'
-import ITemplate from '@interfaces/ITemplate'
+import ITemplate from './../../interfaces/ITemplate'
 import PropTypes from 'prop-types'
-import { TEMPLATE_TYPES } from '@common/constants/TemplateConstant'
-import AppActions from '@redux/actions/AppActions'
-import Typography from '@components/Typography'
+import { TEMPLATE_TYPES } from './../../common/constants/TemplateConstant'
+import AppActions from './../../redux/actions/AppActions'
+import Typography from './../Typography'
 import { Stage, Layer } from 'react-konva'
 import ImageCanvas from './ImageCanvas'
-import AdminDeviceThumbnailAction from '@redux/actions/AdminDeviceThumbnailAction'
-import AdminTemplateAction from '@redux/actions/AdminTemplatesActions'
-import TemplateAction from '@redux/actions/TemplateAction'
-import templateService from '@services/template.service'
+import AdminDeviceThumbnailAction from './../../redux/actions/AdminDeviceThumbnailAction'
+import AdminTemplateAction from './../../redux/actions/AdminTemplatesActions'
+import TemplateAction from './../../redux/actions/TemplateAction'
 import TextCanvas from './TextCanvas'
 
 class TemplateMenuOptions extends React.Component {
@@ -38,9 +37,9 @@ class TemplateMenuOptions extends React.Component {
     })
   }
 
-  handleSelectTemplate = (template, type) => () => {
-    const { setCurrentTemplate } = this.props
-    setCurrentTemplate({ ...template, type })
+  handleSelectTemplate = (template, type) => async () => {
+    const { setCurrentTemplate, getCustomerTemplates } = this.props
+    await setCurrentTemplate({ ...template, type })
   }
 
   getWidth = numberScreens => {

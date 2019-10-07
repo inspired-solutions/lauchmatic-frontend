@@ -4,21 +4,24 @@ import React from 'react'
 import { useDrop } from 'react-dnd'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { ItemTypes } from '@common/constants/ItemTypesConstant'
-import ScreensActions from '@redux/actions/ScreensActions'
+import { ItemTypes } from './../../../common/constants/ItemTypesConstant'
+import ScreensActions from './../../../redux/actions/ScreensActions'
+import fileHelpers from './../../../common/helpers/fileHelpers'
+import TemplateAction from './../../../redux/actions/TemplateAction'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function DeviceShallow({ device, addScreenCanvas, listScreensCanvas }) {
-  const attachedScreen = listScreensCanvas.find(screen => screen.deviceId === device.id)
+function DeviceShallow({ device, addScreenCanvas, template, screen, getCustomerTemplates }) {
   const [, drop] = useDrop({
     accept: ItemTypes.SCREEN,
-    drop: item => {
-      console.log(item)
+    drop: async item => {
       console.log('entro a drop')
-      addScreenCanvas({
+      await addScreenCanvas({
         ...item.image,
-        deviceId: device.id,
+        device_id: device.id,
+        template_id: template.id,
+        image: fileHelpers.dataURLtoBlob(item.image.url),
       })
+      await getCustomerTemplates()
     },
     canDrop: () => true,
   })
@@ -38,10 +41,10 @@ function DeviceShallow({ device, addScreenCanvas, listScreensCanvas }) {
         zIndex: 1004,
       }}
     >
-      {attachedScreen && (
+      {/* {screen && (
         <img
-          src={attachedScreen.url}
-          alt={device.id}
+          src={`${process.env.NEXT_PUBLIC_API}${screen.image}`}
+          alt={screen.id}
           style={{
             width: +(+device.width).toFixed(2),
             height: +(+device.height).toFixed(2),
@@ -49,17 +52,16 @@ function DeviceShallow({ device, addScreenCanvas, listScreensCanvas }) {
             objectFit: 'cover',
           }}
         />
-      )}
+      )} */}
     </div>
   )
 }
 
-const mapStateToProps = state => ({
-  listScreensCanvas: state.screens.listScreensCanvas,
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = {
   addScreenCanvas: ScreensActions.addScreenCanvas,
+  getCustomerTemplates: TemplateAction.getCustomerTemplates,
 }
 
 export default compose(

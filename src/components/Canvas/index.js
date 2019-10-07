@@ -1,17 +1,13 @@
 import './styles.scss'
 import { useDrop } from 'react-dnd'
-import { COLOR_FILL_TYPE } from '@common/constants/BackgroundConstant'
-import { SELECTED_MODULE } from '@common/constants/SelectedModuleConstant'
-import { TEMPLATE_TYPES } from '@common/constants/TemplateConstant'
-import BackgroundHelper from '@common/helpers/BackgroundHelper'
-import { getRgba } from '@common/helpers/ColorHelpers'
-import IBackground from '@interfaces/IBackground'
-import ITemplate from '@interfaces/ITemplate'
-import IText from '@interfaces/IText'
-import AppActions from '@redux/actions/AppActions'
-import ImagesActions from '@redux/actions/ImagesActions'
-import TextActions from '@redux/actions/TextActions'
-import AddIcon from '@svgs/add.svg'
+import { SELECTED_MODULE } from './../../common/constants/SelectedModuleConstant'
+import { TEMPLATE_TYPES } from './../../common/constants/TemplateConstant'
+import ITemplate from './../../interfaces/ITemplate'
+import IText from './../../interfaces/IText'
+import AppActions from './../../redux/actions/AppActions'
+import ImagesActions from './../../redux/actions/ImagesActions'
+import TextActions from './../../redux/actions/TextActions'
+import AddIcon from './../../svgs/add.svg'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
@@ -20,14 +16,10 @@ import { connect } from 'react-redux'
 import Icon from '../Icon'
 import Typography from '../Typography'
 
-import { Stage, Layer, Text } from 'react-konva'
-import TextCanvas from '@components/TextCanvas'
-import { ItemTypes } from '@common/constants/ItemTypesConstant'
-import Device from '@components/Canvas/Device'
-import DeviceShallow from '@components/Canvas/Device/Deviceshallow'
-import ScreensActions from '@redux/actions/ScreensActions'
-import BackgroundActions from '@redux/actions/BackgroundActions'
-import TemplateAction from '@redux/actions/TemplateAction'
+import { ItemTypes } from './../../common/constants/ItemTypesConstant'
+import ScreensActions from './../../redux/actions/ScreensActions'
+import BackgroundActions from './../../redux/actions/BackgroundActions'
+import TemplateAction from './../../redux/actions/TemplateAction'
 import CanvasTemplate from './CanvasTemplate'
 
 function Canvas({
@@ -41,12 +33,12 @@ function Canvas({
   deleteText,
   addImageCanvas,
   setSelectedText,
-  background,
   currentTemplate,
   setSelectedModule,
-  gradientColorStart,
-  gradientColorEnd,
-  type,
+  // background,
+  // gradientColorStart,
+  // gradientColorEnd,
+  // type,
   setImageCanvasSelected,
   updateImageCanvas,
   imageCanvasSelected,
@@ -64,6 +56,7 @@ function Canvas({
   thumbnail,
   selectedModule,
   deleteCustomerTemplate,
+  updateTextTemplate,
 }) {
   const [textRef, setTextRef] = useState(null)
   const [, drop] = useDrop({
@@ -93,27 +86,6 @@ function Canvas({
       position: monitor.getClientOffset(),
     }),
   })
-
-  const getBackgroundFromSelectedMode = () => {
-    switch (type) {
-      case COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR:
-        return BackgroundHelper.getBackgroundColor(background.value)
-
-      case COLOR_FILL_TYPE.GRADIENT_FILL_LINEAR:
-        return `linear-gradient(to right, ${getRgba(gradientColorStart.value)}, ${getRgba(
-          gradientColorEnd.value
-        )})`
-
-      case COLOR_FILL_TYPE.GRADIENT_FILL_RADIAL:
-        return `radial-gradient(circle, ${getRgba(gradientColorStart.value)}, ${getRgba(
-          gradientColorEnd.value
-        )})`
-
-      default:
-        return ''
-    }
-  }
-
   const getWidth = screenType => {
     switch (screenType) {
       case TEMPLATE_TYPES.TWO_SCREEN:
@@ -160,7 +132,7 @@ function Canvas({
             resetScreensState={resetScreensState}
             resetBackgroundActions={resetBackgroundActions}
             getWidth={getWidth}
-            getBackgroundFromSelectedMode={getBackgroundFromSelectedMode}
+            // getBackgroundFromSelectedMode={getBackgroundFromSelectedMode}
             addImageCanvas={addImageCanvas}
             addText={addText}
             setSelectedText={setSelectedText}
@@ -172,6 +144,7 @@ function Canvas({
             updateText={updateText}
             selectedModule={selectedModule}
             handleDeleteTemplate={handleDeleteTemplate}
+            updateTextTemplate={updateTextTemplate}
           />
         ))}
 
@@ -202,7 +175,6 @@ function Canvas({
 
 const mapStateToProps = state => ({
   images: state.images.listImagesCanvas,
-  background: state.backgrounds.background,
   currentTemplate: state.app.currentTemplate,
   selectedText: state.texts.selectedText,
   selectedModule: state.app.selectedModule,
@@ -210,9 +182,10 @@ const mapStateToProps = state => ({
   texts: state.texts.list,
   thumbnail: state.app.thumbnail,
 
-  type: state.backgrounds.type,
-  gradientColorStart: state.backgrounds.gradientColorStart,
-  gradientColorEnd: state.backgrounds.gradientColorEnd,
+  // type: state.backgrounds.type,
+  // background: state.backgrounds.background,
+  // gradientColorStart: state.backgrounds.gradientColorStart,
+  // gradientColorEnd: state.backgrounds.gradientColorEnd,
 
   templatesOneScreen: state.template.templatesOneScreen,
   templatesTwoScreen: state.template.templatesTwoScreen,
@@ -237,21 +210,22 @@ const mapDispatchToProps = {
   resetBackgroundActions: BackgroundActions.resetBackgroundActions,
   getCustomerTemplates: TemplateAction.getCustomerTemplates,
   deleteCustomerTemplate: TemplateAction.deleteCustomerTemplate,
+  updateTextTemplate: TemplateAction.updateTextTemplate,
 }
 
 Canvas.defaultProps = {
   texts: [],
   images: [],
-  background: {},
   currentTemplate: {},
   templatesOneScreen: [],
   templatesTwoScreen: [],
   templatesThreeScreen: [],
   thumbnail: '',
 
-  type: '',
-  gradientColorStart: {},
-  gradientColorEnd: {},
+  // background: {},
+  // type: '',
+  // gradientColorStart: {},
+  // gradientColorEnd: {},
   selectedText: '',
   imageCanvasSelected: '',
   selectedModule: '',
@@ -285,14 +259,14 @@ Canvas.propTypes = {
   deleteText: PropTypes.func,
 
   images: PropTypes.arrayOf(PropTypes.shape({})),
-  background: PropTypes.shape(IBackground),
   currentTemplate: PropTypes.shape(ITemplate),
   templatesOneScreen: PropTypes.arrayOf(ITemplate),
   templatesTwoScreen: PropTypes.arrayOf(ITemplate),
   templatesThreeScreen: PropTypes.arrayOf(ITemplate),
-  type: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  gradientColorStart: PropTypes.shape(IBackground),
-  gradientColorEnd: PropTypes.shape(IBackground),
+  // type: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  // background: PropTypes.shape(IBackground),
+  // gradientColorStart: PropTypes.shape(IBackground),
+  // gradientColorEnd: PropTypes.shape(IBackground),
   thumbnail: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedModule: PropTypes.number,
 

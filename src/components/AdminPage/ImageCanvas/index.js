@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Image, Transformer } from 'react-konva'
 import useImage from 'use-image'
-import IImage from '@interfaces/IImage'
+import IImage from './../../../interfaces/IImage'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ImageCanvas({ image, selected, setSelectedDevice, updateDeviceCanvas }) {

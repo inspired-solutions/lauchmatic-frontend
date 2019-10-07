@@ -9,11 +9,11 @@ import ModalPortal from '../ModalPortal'
 import ExportModal from '../ExportModal'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import AppActions from '@redux/actions/AppActions'
+import AppActions from './../../redux/actions/AppActions'
 import PropTypes from 'prop-types'
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-import { useAppState } from '@components/AppStateProvider'
+import { useAppState } from './../AppStateProvider'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function Header({ currentDesign, currentTemplate, saving, setCurrentDesign }) {
@@ -26,21 +26,9 @@ function Header({ currentDesign, currentTemplate, saving, setCurrentDesign }) {
 
   const handleExportDesign = () => {
     console.log('entro')
-    // console.log(state.templateRef)
-    const canvas = document.getElementById('canvas' + currentTemplate.id)
-    console.log(canvas)
-    canvas.setAttribute('crossOrigin', 'anonymous')
-    htmlToImage
-      .toPng(canvas, { quality: 0.95, style: { margin: '0px', width: '100%' } })
-      .then(url => {
-        setCurrentDesign(url)
-        toggleExportModal(true)()
-      })
-
-    /**to future implementation */
-    // const dataURL = state.templateRef.toDataURL({ pixelRatio: 3 })
-    // setCurrentDesign(dataURL)
-    // toggleExportModal(true)()
+    const dataURL = state.templateRef.toDataURL({ pixelRatio: 3 })
+    setCurrentDesign(dataURL)
+    toggleExportModal(true)()
   }
 
   return (
@@ -56,7 +44,7 @@ function Header({ currentDesign, currentTemplate, saving, setCurrentDesign }) {
       <Typography underline muted>
         {saving ? 'saving...' : 'Changes auto-saved'}
       </Typography>
-      <Button color="primary" onClick={handleExportDesign} disabled={!currentTemplate}>
+      <Button color="primary" onClick={handleExportDesign} disabled={!currentTemplate.id}>
         <Typography variant="body1" weight="semi-bold">
           Export
         </Typography>
@@ -73,6 +61,7 @@ function Header({ currentDesign, currentTemplate, saving, setCurrentDesign }) {
             design={currentDesign}
             closeModal={toggleExportModal(false)}
             templateType={currentTemplate && currentTemplate.type}
+            currentTemplate={currentTemplate}
           />
         </ModalPortal>
       )}

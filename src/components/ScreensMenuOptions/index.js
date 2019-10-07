@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import ImageScreen from '../Image/index'
-import { SELECTED_MODULE } from '@common/constants/SelectedModuleConstant'
-import { ItemTypes } from '@common/constants/ItemTypesConstant'
-import ScreensActions from '@redux/actions/ScreensActions'
+import { SELECTED_MODULE } from './../../common/constants/SelectedModuleConstant'
+import { ItemTypes } from './../../common/constants/ItemTypesConstant'
+import ScreensActions from './../../redux/actions/ScreensActions'
 import PropTypes from 'prop-types'
 
 class ScreensMenuOptions extends React.Component {
@@ -19,17 +19,17 @@ class ScreensMenuOptions extends React.Component {
       reader.onload = e => {
         const img = new Image()
         img.onload = () => {
-          if (
-            (img.width == 1242 && img.height == 2688) ||
-            (img.width == 2688 && img.height == 1242)
-          ) {
-            addScreenMenu({
-              url: e.target.result,
-            })
-          } else {
-            alert('Error, only allowed images with 1242 x 2688(resolution)')
-            document.getElementById('file-screen').value = null
-          }
+          // if (
+          //   (img.width == 1242 && img.height == 2688) ||
+          //   (img.width == 2688 && img.height == 1242)
+          // ) {
+          addScreenMenu({
+            url: e.target.result,
+          })
+          // } else {
+          alert('Error, only allowed images with 1242 x 2688(resolution)')
+          document.getElementById('file-screen').value = null
+          // }
         }
         img.src = e.target.result
       }

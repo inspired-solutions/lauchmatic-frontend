@@ -1,13 +1,13 @@
 import React from 'react'
 import './styles.scss'
 import classNames from 'classnames'
-import { GRADIENT_COLOR_SELECTED } from '@common/constants/BackgroundConstant'
+import { GRADIENT_COLOR_SELECTED } from './../../common/constants/BackgroundConstant'
 import { connect } from 'react-redux'
 
-import { getRgba } from '@common/helpers/ColorHelpers'
+import { getRgba } from './../../common/helpers/ColorHelpers'
 import PropTypes from 'prop-types'
-import BackgroundActions from '@redux/actions/BackgroundActions'
-import IBackground from '@interfaces/IBackground'
+import BackgroundActions from './../../redux/actions/BackgroundActions'
+import IBackground from './../../interfaces/IBackground'
 
 function GradientPicker({
   containerStyle,
@@ -65,8 +65,8 @@ function GradientPicker({
 
 const mapStateToProps = state => ({
   gradientColorSelected: state.backgrounds.gradientColorSelected,
-  gradientColorStart: state.backgrounds.gradientColorStart,
-  gradientColorEnd: state.backgrounds.gradientColorEnd,
+  // gradientColorStart: state.backgrounds.gradientColorStart,
+  // gradientColorEnd: state.backgrounds.gradientColorEnd,
 })
 
 const mapDispatchToProps = {

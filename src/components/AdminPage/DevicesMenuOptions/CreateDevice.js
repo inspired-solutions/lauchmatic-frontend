@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import Typography from '@components/Typography'
-import Button from '@components/Button'
+import Typography from './../../Typography'
+import Button from './../../Button'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import PropTypes from 'prop-types'
-import AdminDeviceThumbnailAction from '@redux/actions/AdminDeviceThumbnailAction'
+import AdminDeviceThumbnailAction from './../../../redux/actions/AdminDeviceThumbnailAction'
 
 function CreateDevice({ addDeviceThumbnail, getDeviceThumbnails, devices }) {
   const [imageFile, setImageFile] = useState(null)

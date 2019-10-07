@@ -4,14 +4,22 @@ import React, { useEffect, useRef, useCallback } from 'react'
 import './styles.scss'
 
 import PropTypes from 'prop-types'
-import IText from '@interfaces/IText'
+import IText from './../../interfaces/IText'
 import { Text, Transformer } from 'react-konva'
-import TextHelpers from '@common/helpers/TextHelpers'
-import { TEXT_ALIGN, FONT_STYLES } from '@common/constants/FontConstants'
+import TextHelpers from './../../common/helpers/TextHelpers'
+import { TEXT_ALIGN, FONT_STYLES } from './../../common/constants/FontConstants'
 import _debounce from 'lodash-es/debounce'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef }) {
+function TextCanvas({
+  text,
+  updateText,
+  selected,
+  setSelectedText,
+  setTextRef,
+  updateTextTemplate,
+  template,
+}) {
   const shapeRef = React.useRef(null)
   const trRef = useRef(null)
   let textarea = null
@@ -46,12 +54,13 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
       {selected && <Transformer ref={trRef} />}
       <Text
         id={id}
+        default
         text={value}
         x={x}
         y={y}
         fontFamily={fontFamily}
         align={align}
-        // fill={TextHelpers.getCanvasColor(text)}
+        fill={TextHelpers.getCanvasColor(text)}
         fontSize={fontSize}
         fontStyle={fontStyle}
         draggable
@@ -71,7 +80,7 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
             scaleY: 1,
           })
         }}
-        onDragEnd={e => {
+        onDragEnd={async e => {
           const node = shapeRef.current
           const scaleX = node.scaleX()
           const scaleY = node.scaleY()
@@ -79,7 +88,16 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
           // we will reset it back
           node.scaleX(1)
           node.scaleY(1)
-
+          await updateTextTemplate(template, {
+            id: text.id,
+            x: Number(node.x().toFixed(2)),
+            y: Number(node.y().toFixed(2)),
+            left: Number(node.x().toFixed(2)),
+            top: Number(node.y().toFixed(2)),
+            width: Number((node.width() * scaleX).toFixed(2)),
+            height: Number((node.height() * scaleY).toFixed(2)),
+            rotation: Number((node.rotation() * scaleY).toFixed(2)),
+          })
           updateTextCallBack.cancel()
           updateTextCallBack({
             id: text.id,
@@ -92,7 +110,7 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
             rotation: Number((node.rotation() * scaleY).toFixed(2)),
           })
         }}
-        onTransformEnd={e => {
+        onTransformEnd={async e => {
           // transformer is changing scale
           const node = shapeRef.current
           const scaleX = node.scaleX()
@@ -101,7 +119,16 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
           // we will reset it back
           node.scaleX(1)
           node.scaleY(1)
-
+          await updateTextTemplate(template, {
+            id: text.id,
+            x: Number(node.x().toFixed(2)),
+            y: Number(node.y().toFixed(2)),
+            left: Number(node.x().toFixed(2)),
+            top: Number(node.y().toFixed(2)),
+            width: Number((node.width() * scaleX).toFixed(2)),
+            height: Number((node.height() * scaleY).toFixed(2)),
+            rotation: Number((node.rotation() * scaleY).toFixed(2)),
+          })
           updateTextCallBack.cancel()
           updateTextCallBack({
             id: text.id,
@@ -212,12 +239,13 @@ function TextCanvas({ text, updateText, selected, setSelectedText, setTextRef })
             textarea.style.height = 'auto'
             textarea.style.height = `${textarea.scrollHeight + shapeRef.current.fontSize()}px`
           })
-          textarea.addEventListener('blur', e => {
+          textarea.addEventListener('blur', async e => {
             textarea.parentNode.removeChild(textarea)
             shapeRef.current.show()
             trRef.current.show()
             trRef.current.forceUpdate()
             trRef.current.getLayer().draw()
+            await updateTextTemplate(template, { id: text.id, value: textarea.value })
             updateTextCallBack.cancel()
             updateTextCallBack({
               value: textarea.value,
@@ -244,6 +272,8 @@ TextCanvas.propTypes = {
   selected: PropTypes.bool.isRequired,
   setSelectedText: PropTypes.func.isRequired,
   setTextRef: PropTypes.func.isRequired,
+  updateTextTemplate: PropTypes.func.isRequired,
+  template: PropTypes.shape({}).isRequired,
 }
 
 export default TextCanvas

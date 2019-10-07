@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useDrag } from 'react-dnd'
-import IImage from '@interfaces/IImage'
+import IImage from './../../../interfaces/IImage'
 
 function ImageDevice({ device, itemType }) {
   const [{ isDragging }, drag] = useDrag({
@@ -39,9 +39,7 @@ function ImageDevice({ device, itemType }) {
   )
 }
 
-const mapStateToProps = state => ({
-  currentTemplate: state.app.currentTemplate,
-})
+const mapStateToProps = state => ({})
 const mapDispatchToProps = {}
 
 ImageDevice.defaultProps = {}

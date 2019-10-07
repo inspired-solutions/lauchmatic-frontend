@@ -4,10 +4,10 @@ import React, { useEffect, useRef } from 'react'
 import './styles.scss'
 
 import PropTypes from 'prop-types'
-import IText from '@interfaces/IText'
+import IText from '../../../../interfaces/IText'
 import { Text, Transformer } from 'react-konva'
-import { TEXT_ALIGN, FONT_STYLES } from '@common/constants/FontConstants'
-import { SELECTED_MODULE } from '@common/constants/SelectedModuleConstant'
+import { TEXT_ALIGN, FONT_STYLES } from './../../../../common/constants/FontConstants'
+import { SELECTED_MODULE } from './../../../../common/constants/SelectedModuleConstant'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function TextCanvas({

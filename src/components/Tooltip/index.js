@@ -4,7 +4,7 @@ import './styles.scss'
 import Typography from '../Typography'
 
 import { connect } from 'react-redux'
-import AppActions from '@redux/actions/AppActions'
+import AppActions from './../../redux/actions/AppActions'
 import PropTypes from 'prop-types'
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

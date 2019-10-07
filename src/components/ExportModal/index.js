@@ -7,37 +7,25 @@ import {
   SCREENS_RESOLUTIONS,
   SCREENS_ORDER_NAME,
   SCREENS_MIME,
-} from '@common/constants/ScreensConstant'
+} from './../../common/constants/ScreensConstant'
 import Button from '../Button'
 import Paper from '../Paper'
 import Icon from '../Icon'
-import CloseModalIcon from '@svgs/close-modal.svg'
+import CloseModalIcon from './../../svgs/close-modal.svg'
 import classNames from 'classnames'
-import { TEMPLATE_TYPES } from '@common/constants/TemplateConstant'
+import { TEMPLATE_TYPES } from './../../common/constants/TemplateConstant'
 import PropTypes from 'prop-types'
 
-function ExportModal({ design, closeModal, templateType }) {
+function ExportModal({ design, closeModal, templateType, currentTemplate }) {
   /**future implementation */
-  // const downloadURI = (uri, name) => {
-  //   const link = document.createElement('a')
-  //   link.download = name
-  //   link.href = uri
-  //   document.body.appendChild(link)
-  //   link.click()
-  //   document.body.removeChild(link)
-  //   // delete link
-  // }
-  const handleExport = () => {
-    try {
-      console.log(design)
-      const link = document.createElement('a')
-      link.setAttribute('crossOrigin', 'anonymous')
-      link.download = 'canvas-image-export.png'
-      link.href = design
-      link.click()
-    } catch (error) {
-      console.log(error)
-    }
+  const downloadURI = (uri, name) => {
+    const link = document.createElement('a')
+    link.download = name
+    link.href = uri
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    // delete link
   }
 
   return (
@@ -114,9 +102,9 @@ function ExportModal({ design, closeModal, templateType }) {
               color="primary"
               containerStyle={{ height: 50, width: 245, marginBottom: 10 }}
               onClick={() => {
-                handleExport()
+                // handleExport()
                 /**future implementation */
-                // downloadURI(design, 'stage.png')
+                downloadURI(design, 'stage.png')
               }}
             >
               <Typography color="light" weight="semi-bold">
@@ -142,11 +130,11 @@ function ExportModal({ design, closeModal, templateType }) {
             className={classNames(
               {
                 [`c-export-modal__content-preview-img-container--one-screen`]:
-                  templateType === TEMPLATE_TYPES.ONE_SCREEN,
+                  currentTemplate.screen_quantity === TEMPLATE_TYPES.ONE_SCREEN,
                 [`c-export-modal__content-preview-img-container--two-screen`]:
-                  templateType === TEMPLATE_TYPES.TWO_SCREEN,
+                  currentTemplate.screen_quantity === TEMPLATE_TYPES.TWO_SCREEN,
               },
-              'c-export-modal__content-preview-img-container'
+              'c-export-modal__content-previewpreview-img-container'
             )}
           >
             <img src={design} alt="" className="c-export-modal__content-preview-img" />

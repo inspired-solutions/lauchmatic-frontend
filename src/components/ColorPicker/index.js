@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '../Typography'
 import './styles.scss'
-import { getRgba, getRgbaObject } from '@common/helpers/ColorHelpers'
+import { getRgba, getRgbaObject } from './../../common/helpers/ColorHelpers'
 import { SketchPicker } from 'react-color'
 import PropTypes from 'prop-types'
 

@@ -2,19 +2,20 @@ import React, { useRef } from 'react'
 import classNames from 'classnames'
 import { Stage, Layer } from 'react-konva'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from '@common/constants/ItemTypesConstant'
-import Typography from '@components/Typography'
-import Device from '@components/Canvas/Device'
-import DeviceShallow from '@components/Canvas/Device/Deviceshallow'
-import ImageCanvas from '@components/ImageCanvas'
-import TextCanvas from '@components/TextCanvas'
-import { TEMPLATE_TYPES } from '@common/constants/TemplateConstant'
-import { SELECTED_MODULE } from '@common/constants/SelectedModuleConstant'
-import fileHelpers from '@common/helpers/fileHelpers'
-
+import { ItemTypes } from './../../../common/constants/ItemTypesConstant'
+import Typography from './../../Typography'
+import Device from './../../Canvas/Device'
+import DeviceShallow from './../../Canvas/Device/Deviceshallow'
+import ImageCanvas from './../../ImageCanvas'
+import TextCanvas from './../../TextCanvas'
+import { SELECTED_MODULE } from './../../../common/constants/SelectedModuleConstant'
+import fileHelpers from './../../../common/helpers/fileHelpers'
+import Background from './Background'
+import ScreenCanvas from '../Device/Screen'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-import { useAppState } from '@components/AppStateProvider'
+import { useAppState } from './../../AppStateProvider'
+import Gutters from './Gutters'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function CanvasTemplate({
@@ -31,7 +32,7 @@ function CanvasTemplate({
   resetScreensState,
   resetBackgroundActions,
   getWidth,
-  getBackgroundFromSelectedMode,
+  // getBackgroundFromSelectedMode,
   addImageCanvas,
   addText,
   setSelectedText,
@@ -43,6 +44,7 @@ function CanvasTemplate({
   updateText,
   selectedModule,
   handleDeleteTemplate,
+  updateTextTemplate,
 }) {
   const [state, dispatch] = useAppState()
   const stageRef = useRef(null)
@@ -85,6 +87,9 @@ function CanvasTemplate({
       position: monitor.getClientOffset(),
     }),
   })
+  const getScreen = (screenList, deviceId) => {
+    return screenList.find(screen => screen.device == deviceId)
+  }
 
   return (
     <div
@@ -115,7 +120,7 @@ function CanvasTemplate({
       )}
       // onClick={handleClick}
       style={{
-        background: getBackgroundFromSelectedMode() || 'white',
+        // background: getBackgroundFromSelectedMode() || 'white',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
         /**latest added */
@@ -133,8 +138,8 @@ function CanvasTemplate({
       onMouseEnter={() => {
         console.log('entro')
       }}
-      onClick={() => {
-        setCurrentTemplate(template)
+      onClick={async () => {
+        await setCurrentTemplate(template)
         console.log(stageRef.current.toDataURL({ pixelRatio: 3 }))
         dispatch({ type: 'SET_TEMPLATE_REF', payload: stageRef.current })
       }}
@@ -156,43 +161,14 @@ function CanvasTemplate({
       >
         <Typography variant="caption"> Template #{template.id}</Typography>
       </div>
-      {template.screen_quantity === TEMPLATE_TYPES.TWO_SCREEN && (
-        <div
-          style={{
-            position: 'absolute',
-            width: 16,
-            height: '100%',
-            zIndex: 1000,
-            backgroundColor: 'var(--color-background)',
-          }}
-        />
-      )}
-      {template.screen_quantity === TEMPLATE_TYPES.THREE_SCREEN && (
-        <>
-          <div
-            style={{
-              position: 'absolute',
-              left: 268,
-              width: 16,
-              zIndex: 1000,
-              height: '100%',
-              backgroundColor: 'var(--color-background)',
-            }}
-          />
-          <div
-            style={{
-              right: 268,
-              position: 'absolute',
-              width: 16,
-              zIndex: 1000,
-              height: '100%',
-              backgroundColor: 'var(--color-background)',
-            }}
-          />
-        </>
-      )}
+      {/* /**only for detect drop event from screen menu  */}
       {template.devices.map(device => (
-        <DeviceShallow device={device} key={device.id} />
+        <DeviceShallow
+          device={device}
+          key={device.id}
+          template={template}
+          screen={getScreen(template.screens_list, device.id)}
+        />
       ))}
       <Stage
         ref={stageRef}
@@ -239,6 +215,7 @@ function CanvasTemplate({
           setTextRef(null)
         }}
       >
+        <Background width={getWidth(template.screen_quantity)} height={478} template={template} />
         <Layer>
           {template.texts_list.map(text => (
             <TextCanvas
@@ -249,6 +226,8 @@ function CanvasTemplate({
               deleteText={deleteText}
               selected={selectedText === text.id}
               setSelectedText={setSelectedText}
+              template={template}
+              updateTextTemplate={updateTextTemplate}
             />
           ))}
         </Layer>
@@ -265,16 +244,18 @@ function CanvasTemplate({
         </Layer>
         <Layer>
           {template.devices.map(device => (
-            <Device
-              device={device}
-              key={device.id}
-              // addScreenCanvas={addScreenCanvas}
-              // setSelectedDevice={setSelectedDevice}
-              // updateDeviceCanvas={updateDeviceCanvas}
-              // selected={image.id === seletedDevice}
-            />
+            <>
+              <Device device={device} key={device.id} />
+              {getScreen(template.screens_list, device.id) && (
+                <ScreenCanvas
+                  device={device}
+                  screen={getScreen(template.screens_list, device.id)}
+                />
+              )}
+            </>
           ))}
         </Layer>
+        <Gutters width={getWidth(template.screen_quantity)} height={478} template={template} />
       </Stage>
     </div>
   )

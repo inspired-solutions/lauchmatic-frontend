@@ -3,7 +3,7 @@ import './styles.scss'
 import PropTypes from 'prop-types'
 import { Image, Transformer } from 'react-konva'
 import useImage from 'use-image'
-import IImage from '@interfaces/IImage'
+import IImage from './../../interfaces/IImage'
 import _debounce from 'lodash-es/debounce'
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

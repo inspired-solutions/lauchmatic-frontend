@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
-import Typography from '@components/Typography'
-import Button from '@components/Button'
+import Typography from './../../Typography'
+import Button from './../../Button'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import AdminDevicesAction from '@redux/actions/AdminDeviceActions'
-import ImageDevice from '@components/AdminPage/ImageDevice'
-import ItemTypes from '@common/ItemTypes'
+import AdminDevicesAction from './../../../redux/actions/AdminDeviceActions'
+import ImageDevice from './../../AdminPage/ImageDevice'
+import ItemTypes from "./../../../common/ItemTypes";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,18 +18,18 @@ function AddDevices({ devices, addDevices }) {
       reader.onload = e => {
         const img = new Image()
         img.onload = () => {
-          if (
-            (img.width == 1242 && img.height == 2688) ||
-            (img.width == 2688 && img.height == 1242)
-          ) {
-            addDevices({
-              url: e.target.result,
-              name: e.target.result,
-            })
-          } else {
-            alert('Error, only allowed images with 1242 x 2688(resolution)')
-            document.getElementById('file-add-device').value = null
-          }
+          // if (
+          //   (img.width == 1242 && img.height == 2688) ||
+          //   (img.width == 2688 && img.height == 1242)
+          // ) {
+          addDevices({
+            url: e.target.result,
+            name: e.target.result,
+          })
+          // } else {
+          //   alert('Error, only allowed images with 1242 x 2688(resolution)')
+          //   document.getElementById('file-add-device').value = null
+          // }
         }
         img.src = e.target.result
       }

@@ -12,17 +12,17 @@ import {
   FONT_STYLES,
   FONT_SIZES,
   TEXT_ALIGN,
-} from '@common/constants/FontConstants'
+} from './../../../common/constants/FontConstants'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import ColorPicker from '../../ColorPicker'
 import PropTypes from 'prop-types'
-import IText from '@interfaces/IText'
-import TextHelpers from '@common/helpers/TextHelpers'
-import AdminTextAction from '@redux/actions/AdminTextActions'
+import IText from './../../../interfaces/IText'
+import TextHelpers from './../../../common/helpers/TextHelpers'
+import AdminTextAction from './../../../redux/actions/AdminTextActions'
 
-function TextMenuOptions({ updateText, selectedText, texts, currentTemplate }) {
+function TextMenuOptions({ updateText, selectedText, texts }) {
   const handleChangeFontFamily = async value => {
     /** call redux */
     /**call service */
@@ -157,7 +157,7 @@ function TextMenuOptions({ updateText, selectedText, texts, currentTemplate }) {
           />
         </div>
       </div>
-      <div className="c-text-menu-options__color-picker" style={{ marginTop: 32 }}>
+      {/* <div className="c-text-menu-options__color-picker" style={{ marginTop: 32 }}>
         <Typography
           variant="body2"
           color="text-secondary"
@@ -167,14 +167,13 @@ function TextMenuOptions({ updateText, selectedText, texts, currentTemplate }) {
           Color
         </Typography>
         <ColorPicker onChange={handleChangeColor} value={color} />
-      </div>
+      </div> */}
     </div>
   )
 }
 const mapStateToProps = state => ({
   selectedText: state.adminApp.selectedText,
   texts: state.texts.list,
-  currentTemplate: state.app.currentTemplate,
 })
 
 const mapDispatchToProps = {
@@ -185,14 +184,12 @@ const mapDispatchToProps = {
 TextMenuOptions.defaultProps = {
   updateText: () => {},
   selectedText: {},
-  currentTemplate: {},
   texts: [],
   // updateTextTemplate: () => {},
 }
 TextMenuOptions.propTypes = {
   selectedText: PropTypes.string,
   texts: PropTypes.arrayOf(PropTypes.shape(IText)),
-  currentTemplate: PropTypes.shape({}),
   updateText: PropTypes.func,
   // updateTextTemplate: PropTypes.func,
 }
