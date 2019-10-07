@@ -1,37 +1,30 @@
-import AdminDeviceThumbnailTypes from "../types/AdminDeviceThumbnailTypes";
-import deviceThumbnailService from "../../services/deviceThumbnail.service";
-
+import AdminDevicesTypes from "../types/AdminDevicesTypes";
+import uuid from "uuid/v1";
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AdminDeviceThumbnailAction = {
-  addDeviceThumbnail: device => async dispatch => {
-    try {
-      const response = await deviceThumbnailService.addDeviceThumbnail(device);
-      dispatch({
-        type: AdminDeviceThumbnailTypes.ADMIN_ADD_DEVICE_THUMBNAIL,
-        payload: response
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
+const AdminDevicesAction = {
+  loadDevices: devices => ({
+    type: AdminDevicesTypes.ADMIN_LOAD_DEVICES,
+    payload: devices
+  }),
 
-  getDeviceThumbnails: () => async dispatch => {
-    try {
-      const response = await deviceThumbnailService.getDeviceThumbnails();
-      dispatch({
-        type: AdminDeviceThumbnailTypes.ADMIN_GET_DEVICE_THUMBNAILS,
-        payload: response
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  addDevices: device => ({
+    type: AdminDevicesTypes.ADMIN_ADD_DEVICES,
+    payload: { id: uuid(), ...device }
+  }),
 
-  setDeviceThumbnail: device => ({
-    type: AdminDeviceThumbnailTypes.ADMIN_SET_DEVICE,
+  addDevicesCanvas: device => ({
+    type: AdminDevicesTypes.ADMIN_ADD_DEVICES_CANVAS,
+    payload: { ...device, id: uuid() }
+  }),
+
+  updateDeviceCanvas: device => ({
+    type: AdminDevicesTypes.ADMIN_UPDATE_DEVICE_CANVAS,
     payload: device
+  }),
+  resetDevicesCanvas: () => ({
+    type: AdminDevicesTypes.ADMIN_RESET_DEVICES_CANVAS
   })
 };
 
-export default AdminDeviceThumbnailAction;
+export default AdminDevicesAction;
