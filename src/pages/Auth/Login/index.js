@@ -28,8 +28,8 @@ class LoginPage extends Component {
         const { is_superuser } = data;
         const route = is_superuser ? "/admin" : "/";
         /**temp, after modifed api.js file */
-        window.location.reload();
-        // this.props.history.push(route);
+        // window.location.reload();
+        this.props.history.push(route);
       } else {
         this.setShow(true);
       }
