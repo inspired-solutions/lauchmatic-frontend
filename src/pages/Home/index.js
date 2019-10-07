@@ -42,7 +42,6 @@
 //   connect(null, mapDispatchToProps)
 // )(HomePage);
 
-
 import React, { useEffect, useRef } from "react";
 import panzoom from "panzoom";
 import { connect } from "react-redux";
@@ -65,29 +64,31 @@ function Home({
   selectedText,
   getDeviceThumbnails,
   getCustomerTemplates,
-  auth,
+  auth
 }) {
   const panzoomRef = useRef(null);
   useEffect(() => {
     // zoomCanvas.dispose()
-    const zoomImage = document.getElementById("image-zoom");
-    panzoomRef.current = panzoom(
-      zoomImage,
-      {
-        beforeWheel: e => {
-          const shouldIgnore = !e.ctrlKey;
-          return shouldIgnore;
+    if (!auth.is_superuser) {
+      const zoomImage = document.getElementById("image-zoom");
+      panzoomRef.current = panzoom(
+        zoomImage,
+        {
+          beforeWheel: e => {
+            const shouldIgnore = !e.ctrlKey;
+            return shouldIgnore;
+          }
+          // filterKey:
+        },
+        {
+          maxZoom: 2,
+          minZoom: 0.5
         }
-        // filterKey:
-      },
-      {
-        maxZoom: 2,
-        minZoom: 0.5
-      }
-    );
-    panzoomRef.current.zoomAbs(300, 100, 1);
-    getDeviceThumbnails();
-    getCustomerTemplates();
+      );
+      panzoomRef.current.zoomAbs(300, 100, 1);
+      getDeviceThumbnails();
+      getCustomerTemplates();
+    }
   }, []);
   if (auth.is_superuser) {
     return (
