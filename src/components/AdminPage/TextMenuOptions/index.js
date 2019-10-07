@@ -42,18 +42,18 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
     updateText({ color: value, id: selectedText.id })
   }
 
-  const { fontFamily, fontSize, text_align, fontStyle, color } = TextHelpers.getCurrentText(
+  const { font_family, font_size, text_align, font_style, color } = TextHelpers.getCurrentText(
     texts,
-    selectedText
+    selectedText.id
   )
-
+  console.log(font_family)
   return (
     <div
       className="c-text-menu-options"
       style={{
-        position: 'relative',
-        height: '100%',
-        ...(!selectedText.id ? { opacity: '0.5' } : {}),
+        position: "relative",
+        height: "100%",
+        ...(!selectedText.id ? { opacity: "0.5" } : {})
       }}
     >
       <div
@@ -65,17 +65,17 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                position: 'absolute',
-                backgroundColor: 'var(--color-grey)',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                position: "absolute",
+                backgroundColor: "var(--color-grey)",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 opacity: 0.5,
-                color: 'white',
+                color: "white"
               }
-            : { display: 'none' }
+            : { display: "none" }
         }
       >
         No text is selected
@@ -83,7 +83,7 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
       <div className="c-text-menu-options__selects-container">
         <div style={{ width: 230 }}>
           <Select
-            value={fontFamily || FONTS_FAMILIES[0].value}
+            value={font_family || FONTS_FAMILIES[0].value}
             options={FONTS_FAMILIES}
             renderLabel={
               <Typography
@@ -101,7 +101,7 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
         </div>
         <div style={{ width: 86 }}>
           <Select
-            value={fontSize || FONT_SIZES[0].value}
+            value={font_size || FONT_SIZES[0].value}
             options={FONT_SIZES}
             renderLabel={
               <Typography
@@ -118,10 +118,13 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
           />
         </div>
       </div>
-      <div className="c-text-menu-options__selects-container" style={{ marginTop: 32 }}>
+      <div
+        className="c-text-menu-options__selects-container"
+        style={{ marginTop: 32 }}
+      >
         <div style={{ width: 188 }}>
           <Select
-            value={fontStyle || FONT_STYLES[0].value}
+            value={font_style || FONT_STYLES[0].value}
             options={FONT_STYLES}
             renderLabel={
               <Typography
@@ -149,7 +152,7 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
           <ButtonGroup
             options={TEXT_ALIGN.map(text_align => ({
               icon: text_align.icon,
-              value: text_align.value,
+              value: text_align.value
             }))}
             value={text_align}
             onChange={handleChangeTextAlignment}
@@ -169,12 +172,12 @@ function TextMenuOptions({ updateText, selectedText, texts }) {
         <ColorPicker onChange={handleChangeColor} value={color} />
       </div> */}
     </div>
-  )
+  );
 }
 const mapStateToProps = state => ({
   selectedText: state.adminApp.selectedText,
-  texts: state.texts.list,
-})
+  texts: state.adminText.list
+});
 
 const mapDispatchToProps = {
   updateText: AdminTextAction.updateText,
