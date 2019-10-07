@@ -6,7 +6,7 @@ const AuthActions = {
     try {
       const response = await AuthService.login(username, password);
       const { status, data } = response;
-
+        
       if (status === 200) {
         dispatch({ type: Types.LOGIN_SUCCESS, payload: data });
       } else {

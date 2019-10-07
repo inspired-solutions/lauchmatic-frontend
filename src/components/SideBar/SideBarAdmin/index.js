@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.scss'
-import TemplateIcon from './../../../svgs/template.svg'
-import ScreensIcon from './../../../svgs/screens.svg'
+import { ReactComponent as TemplateIcon } from "./../../../svgs/template.svg";
+import { ReactComponent as ScreensIcon } from "./../../../svgs/screens.svg";
 import { connect } from 'react-redux'
 
 import { SELECTED_MODULE } from './../../../common/constants/SelectedModuleConstant'
@@ -13,7 +13,7 @@ import TextMenuOptions from './../../AdminPage/TextMenuOptions'
 import MenuOptions from './MenuOptions'
 import SideBarItem from './../../SideBarItem'
 import AdminAppAction from './../../../redux/actions/AdminAppActions'
-import TextIcon from './../../../svgs/text.svg'
+import { ReactComponent as TextIcon } from "./../../../svgs/text.svg";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

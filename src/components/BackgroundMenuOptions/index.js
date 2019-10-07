@@ -1,34 +1,34 @@
-import './styles.scss'
+import "./styles.scss";
 
 import {
   COLOR_FILL,
   COLOR_FILL_TYPE,
-  GRADIENT_COLOR_SELECTED,
-} from './../../common/constants/BackgroundConstant'
-import { SELECTED_MODULE } from './../../common/constants/SelectedModuleConstant'
-import BackgroundHelper from './../../common/helpers/BackgroundHelper'
+  GRADIENT_COLOR_SELECTED
+} from "./../../common/constants/BackgroundConstant";
+import { SELECTED_MODULE } from "./../../common/constants/SelectedModuleConstant";
+import BackgroundHelper from "./../../common/helpers/BackgroundHelper";
 
-import React, { useEffect, useCallback, useRef } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import React, { useEffect, useCallback, useRef } from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 
-import Button from '../Button'
-import ColorPicker from '../ColorPicker'
-import GradientPicker from '../GradientPicker'
-import Icon from '../Icon'
-import Select from '../Select'
-import Typography from '../Typography'
-import ColorInvertIcon from './../../svgs/color_invert.svg'
-import BackgroundActions from './../../redux/actions/BackgroundActions'
-import AppActions from './../../redux/actions/AppActions'
-import PropTypes from 'prop-types'
-import IBackground from '../../interfaces/IBackground'
-import ITemplate from '../../interfaces/ITemplate'
-import TemplateAction from './../../redux/actions/TemplateAction'
-import TemplateHelper from './../../common/helpers/TemplateHelper'
-import _debounce from 'lodash-es/debounce'
-import produce from 'immer'
-import fileHelpers from './../../common/helpers/fileHelpers'
+import Button from "../Button";
+import ColorPicker from "../ColorPicker";
+import GradientPicker from "../GradientPicker";
+import Icon from "../Icon";
+import Select from "../Select";
+import Typography from "../Typography";
+import { ReactComponent as ColorInvertIcon } from "./../../svgs/color_invert.svg";
+import BackgroundActions from "./../../redux/actions/BackgroundActions";
+import AppActions from "./../../redux/actions/AppActions";
+import PropTypes from "prop-types";
+import IBackground from "../../interfaces/IBackground";
+import ITemplate from "../../interfaces/ITemplate";
+import TemplateAction from "./../../redux/actions/TemplateAction";
+import TemplateHelper from "./../../common/helpers/TemplateHelper";
+import _debounce from "lodash-es/debounce";
+import produce from "immer";
+import fileHelpers from "./../../common/helpers/fileHelpers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function BackgroundMenuOptions({
@@ -47,63 +47,63 @@ function BackgroundMenuOptions({
 
   templatesOneScreen,
   templatesTwoScreen,
-  templatesThreeScreen,
+  templatesThreeScreen
 }) {
-  const inputFile = useRef(null)
+  const inputFile = useRef(null);
 
   const templateSelected = TemplateHelper.getCurrentTemplate(
     [...templatesOneScreen, ...templatesTwoScreen, ...templatesThreeScreen],
     currentTemplate.id
-  )
+  );
   const {
     type = COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR,
     background = {
       id: 0,
       value: {
-        hex: '',
-        opacity: '',
-        gradient: '',
-        imageUrl: '',
-      },
+        hex: "",
+        opacity: "",
+        gradient: "",
+        imageUrl: ""
+      }
     },
     gradientColorStart = {
       id: 0,
       value: {
-        hex: '',
-        opacity: '',
-      },
+        hex: "",
+        opacity: ""
+      }
     },
     gradientColorEnd = {
       id: 0,
       value: {
-        hex: '',
-        opacity: '',
-      },
-    },
-  } = templateSelected.background_color
+        hex: "",
+        opacity: ""
+      }
+    }
+  } = templateSelected.background_color;
 
   const updateTemplateCallBack = useCallback(
     _debounce(template => updateTemplate(template), 2000),
     []
-  )
+  );
   useEffect(() => {
-    getAllBackgrounds()
-  }, [])
+    getAllBackgrounds();
+  }, []);
 
   const handleCheckTemplate = e => {
     if (!templateSelected.id) {
       setMenuMessage({
         menuOption: SELECTED_MODULE.TEMPLATES,
-        message: 'You need to add a template first!',
-      })
+        message: "You need to add a template first!"
+      });
 
-      e.stopPropagation()
+      e.stopPropagation();
     }
-  }
+  };
 
   const loadImage = event => {
     try {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = e => {
         // setBackground({
         //   id: e.target.result,
@@ -117,23 +117,23 @@ function BackgroundMenuOptions({
             draft.background = {
               id: e.target.result,
               value: {
-                imageUrl: `url("${e.target.result}")`,
-              },
-            }
+                imageUrl: `url("${e.target.result}")`
+              }
+            };
           })
-        )
-        updateTemplateCallBack.cancel()
+        );
+        updateTemplateCallBack.cancel();
         updateTemplateCallBack({
           id: templateSelected.id,
           background_image: fileHelpers.dataURLtoBlob(e.target.result),
-          name: e.target.result,
-        })
-      }
-      reader.readAsDataURL(event.target.files[0])
+          name: e.target.result
+        });
+      };
+      reader.readAsDataURL(event.target.files[0]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleChangeColor = async backgroundValue => {
     if (type === COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR) {
@@ -141,45 +141,48 @@ function BackgroundMenuOptions({
       updateBackgroundTemplate(
         templateSelected,
         produce(templateSelected.background_color, draft => {
-          draft.background = { id: background.id, value: backgroundValue }
+          draft.background = { id: background.id, value: backgroundValue };
         })
-      )
-      return
+      );
+      return;
     }
     if (gradientColorSelected === GRADIENT_COLOR_SELECTED.START) {
       // setGradientColorStart({ id: background.id, value: backgroundValue })
       updateBackgroundTemplate(
         templateSelected,
         produce(templateSelected.background_color, draft => {
-          draft.gradientColorStart = { id: background.id, value: backgroundValue }
+          draft.gradientColorStart = {
+            id: background.id,
+            value: backgroundValue
+          };
         })
-      )
-      return
+      );
+      return;
     }
 
     // setGradientColorEnd({ id: background.id, value: backgroundValue })}
     updateBackgroundTemplate(
       templateSelected,
       produce(templateSelected.background_color, draft => {
-        draft.gradientColorEnd = { id: background.id, value: backgroundValue }
+        draft.gradientColorEnd = { id: background.id, value: backgroundValue };
       })
-    )
-    updateTemplateCallBack.cancel()
+    );
+    updateTemplateCallBack.cancel();
     updateTemplateCallBack({
       id: templateSelected.id,
-      background_color: JSON.stringify(templateSelected.background_color),
-    })
-  }
+      background_color: JSON.stringify(templateSelected.background_color)
+    });
+  };
 
   const getCurrentColorFromModeSelected = () => {
     if (type === COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR) {
-      return background.value
+      return background.value;
     }
     if (gradientColorSelected === GRADIENT_COLOR_SELECTED.START) {
-      return gradientColorStart.value
+      return gradientColorStart.value;
     }
-    return gradientColorEnd.value
-  }
+    return gradientColorEnd.value;
+  };
 
   return (
     <div
@@ -198,17 +201,17 @@ function BackgroundMenuOptions({
                 bottom: 0,
                 left: 0,
                 right: 0,
-                position: 'absolute',
-                backgroundColor: 'var(--color-grey)',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                position: "absolute",
+                backgroundColor: "var(--color-grey)",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 opacity: 0.5,
-                color: 'white',
+                color: "white"
               }
-            : { display: 'none' }
+            : { display: "none" }
         }
       >
         No template is selected
@@ -225,17 +228,17 @@ function BackgroundMenuOptions({
         <input
           type="file"
           ref={ref => {
-            inputFile.current = ref
+            inputFile.current = ref;
           }}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={loadImage}
         />
         <Button
           color="info"
           variant="outlined"
           onClick={() => {
-            inputFile.current.click()
-            console.log('entro')
+            inputFile.current.click();
+            console.log("entro");
           }}
         >
           <Typography weight="semi-bold">Import</Typography>
@@ -245,10 +248,10 @@ function BackgroundMenuOptions({
         <div className="c-background-menu-options__content-header">
           <div
             style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center"
             }}
           >
             <Icon size="large">
@@ -262,19 +265,23 @@ function BackgroundMenuOptions({
                 updateBackgroundTemplate(
                   templateSelected,
                   produce(templateSelected.background_color, draft => {
-                    draft.type = value
+                    draft.type = value;
                   })
-                )
+                );
                 // setType(value)
-                updateTemplateCallBack.cancel()
+                updateTemplateCallBack.cancel();
                 await updateTemplateCallBack({
                   id: templateSelected.id,
-                  background_color: JSON.stringify(templateSelected.background_color),
-                })
+                  background_color: JSON.stringify(
+                    templateSelected.background_color
+                  )
+                });
               }}
               top="41"
               renderOption={option => (
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <Typography variant="body2">{option.primary}</Typography>
                   <Typography variant="body2" muted>
                     {option.secondary}
@@ -284,10 +291,10 @@ function BackgroundMenuOptions({
               renderInput={option => (
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    alignItems: 'center',
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    alignItems: "center"
                   }}
                 >
                   <Typography variant="body2">{option.primary}</Typography>
@@ -300,12 +307,12 @@ function BackgroundMenuOptions({
           </div>
           {type !== COLOR_FILL_TYPE.SOLID_FILL_ONE_COLOR && (
             <GradientPicker
-              containerStyle={{ margin: '16px 0px 0px', width: 295 }}
+              containerStyle={{ margin: "16px 0px 0px", width: 295 }}
               gradientColorEnd={gradientColorEnd}
               gradientColorStart={gradientColorStart}
             />
           )}
-          <div style={{ width: '100%', marginTop: 18 }}>
+          <div style={{ width: "100%", marginTop: 18 }}>
             <ColorPicker
               // value={background.value}
               value={getCurrentColorFromModeSelected()}
@@ -325,16 +332,20 @@ function BackgroundMenuOptions({
               tabIndex={0}
               key={background.id}
               className="c-background-menu-options__content-gallery__color"
-              style={{ backgroundColor: BackgroundHelper.getBackgroundColor(background.value) }}
+              style={{
+                backgroundColor: BackgroundHelper.getBackgroundColor(
+                  background.value
+                )
+              }}
               onMouseDown={() => {
-                handleChangeColor(background.value)
+                handleChangeColor(background.value);
               }}
             />
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const mapStateToProps = state => ({
@@ -344,8 +355,8 @@ const mapStateToProps = state => ({
   currentTemplate: state.app.currentTemplate,
   templatesOneScreen: state.template.templatesOneScreen,
   templatesTwoScreen: state.template.templatesTwoScreen,
-  templatesThreeScreen: state.template.templatesThreeScreen,
-})
+  templatesThreeScreen: state.template.templatesThreeScreen
+});
 
 const mapDispatchToprops = {
   setBackground: BackgroundActions.setBackground,
@@ -357,8 +368,8 @@ const mapDispatchToprops = {
   setMenuMessage: AppActions.setMenuMessage,
   updateTemplate: TemplateAction.updateTemplate,
   setCurrentTemplate: AppActions.setCurrentTemplate,
-  updateBackgroundTemplate: TemplateAction.updateBackgroundTemplate,
-}
+  updateBackgroundTemplate: TemplateAction.updateBackgroundTemplate
+};
 
 BackgroundMenuOptions.propTypes = {
   backgrounds: PropTypes.arrayOf(PropTypes.shape(IBackground)).isRequired,
@@ -372,11 +383,11 @@ BackgroundMenuOptions.propTypes = {
 
   setGradientColorStart: PropTypes.func.isRequired,
   setGradientColorEnd: PropTypes.func.isRequired,
-  setMenuMessage: PropTypes.func.isRequired,
-}
+  setMenuMessage: PropTypes.func.isRequired
+};
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToprops
   )
-)(BackgroundMenuOptions)
+)(BackgroundMenuOptions);

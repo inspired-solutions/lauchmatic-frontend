@@ -3,7 +3,7 @@ import './styles.scss'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { SCREENS_TYPE } from './../../../common/constants/ScreensConstant'
-import DeviceIcon from './../../../svgs/device.svg'
+import { ReactComponent as DeviceIcon } from "./../../../svgs/device.svg";
 import ITemplate from './../../../interfaces/ITemplate'
 import PropTypes from 'prop-types'
 import AppActions from './../../../redux/actions/AppActions'
@@ -15,10 +15,8 @@ import { Stage, Layer } from 'react-konva'
 import ImageCanvas from './ImageCanvas'
 import TextCanvas from './TextCanvas'
 import AdminTemplateAction from './../../../redux/actions/AdminTemplatesActions'
-import { Button, SHAPE, KIND } from 'baseui/button'
-import Delete from 'baseui/icon/delete'
 import templateService from './../../../services/template.service'
-
+import Button from "react-bootstrap/Button";
 class TemplateMenuOptions extends React.Component {
   state = {
     currentTab: SCREENS_TYPE[0].value,
@@ -109,50 +107,50 @@ class TemplateMenuOptions extends React.Component {
             <Select
               options={[
                 {
-                  label: 'Select device',
-                  value: '',
+                  label: "Select device",
+                  value: "",
                   icon:
-                    'https://storage.googleapis.com/test-template-47607.appspot.com/thumbnailDevices/57wCc7s16xKe549ER7tl.svg',
+                    "https://storage.googleapis.com/test-template-47607.appspot.com/thumbnailDevices/57wCc7s16xKe549ER7tl.svg"
                 },
                 ...deviceThumbnails.map(device => ({
                   label: device.name,
                   value: device.id,
-                  icon: device.image,
-                })),
+                  icon: device.image
+                }))
               ]}
               renderInput={option => {
                 return (
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
                     <img
                       src={option.icon}
                       alt={option.url}
                       style={{
                         width: 24,
                         height: 24,
-                        objectFit: 'contain',
-                        marginRight: 8,
+                        objectFit: "contain",
+                        marginRight: 8
                       }}
                     />
                     <Typography variant="caption">{option.label}</Typography>
                   </div>
-                )
+                );
               }}
               renderOption={option => {
                 return (
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
                     <img
                       src={option.icon}
                       alt={option.url}
                       style={{
                         width: 24,
                         height: 24,
-                        objectFit: 'contain',
-                        marginRight: 8,
+                        objectFit: "contain",
+                        marginRight: 8
                       }}
                     />
                     <Typography variant="caption">{option.label}</Typography>
                   </div>
-                )
+                );
               }}
               value={deviceThumbnailId}
               optionsColor="grey-light"
@@ -179,20 +177,26 @@ class TemplateMenuOptions extends React.Component {
                   onKeyDown={() => {}}
                   style={{
                     marginTop: 8,
-                    position: 'relative',
+                    position: "relative",
                     width: this.getWidth(3),
                     height: 180,
-                    backgroundColor: 'white',
+                    backgroundColor: "white"
                   }}
                   key={template.id}
                 >
-                  <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 2004 }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      zIndex: 2004
+                    }}
+                  >
                     <Button
-                      shape={SHAPE.round}
-                      kind={KIND.secondary}
                       onClick={this.handleDeleteAdminTemplate(template)}
+                      variant="light"
                     >
-                      <Delete />
+                      X
                     </Button>
                   </div>
                   <Stage width={this.getWidth(3)} height={180}>
@@ -208,7 +212,7 @@ class TemplateMenuOptions extends React.Component {
                             height={device.height * this.getProportionHeight()}
                             rotation={device.rotation}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                     <Layer>
@@ -223,7 +227,7 @@ class TemplateMenuOptions extends React.Component {
                             height={text.height * this.getProportionHeight()}
                             rotation={text.rotation}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                   </Stage>
@@ -239,20 +243,26 @@ class TemplateMenuOptions extends React.Component {
                   onKeyDown={() => {}}
                   style={{
                     marginTop: 8,
-                    position: 'relative',
+                    position: "relative",
                     width: this.getWidth(2),
                     height: 180,
-                    backgroundColor: 'white',
+                    backgroundColor: "white"
                   }}
                   key={template.id}
                 >
-                  <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 2004 }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      zIndex: 2004
+                    }}
+                  >
                     <Button
-                      shape={SHAPE.round}
-                      kind={KIND.secondary}
                       onClick={this.handleDeleteAdminTemplate(template)}
+                      variant="light"
                     >
-                      <Delete />
+                      X
                     </Button>
                   </div>
                   <Stage width={this.getWidth(2)} height={180}>
@@ -268,7 +278,7 @@ class TemplateMenuOptions extends React.Component {
                             height={device.height * this.getProportionHeight()}
                             rotation={device.rotation}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                     <Layer>
@@ -283,7 +293,7 @@ class TemplateMenuOptions extends React.Component {
                             height={text.height * this.getProportionHeight()}
                             rotation={text.rotation}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                   </Stage>
@@ -299,20 +309,26 @@ class TemplateMenuOptions extends React.Component {
                   tabIndex={0}
                   style={{
                     marginTop: 8,
-                    position: 'relative',
+                    position: "relative",
                     width: this.getWidth(1),
                     height: 180,
-                    backgroundColor: 'white',
+                    backgroundColor: "white"
                   }}
                   key={template.id}
                 >
-                  <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 2004 }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      zIndex: 2004
+                    }}
+                  >
                     <Button
-                      shape={SHAPE.round}
-                      kind={KIND.secondary}
                       onClick={this.handleDeleteAdminTemplate(template)}
+                      variant="light"
                     >
-                      <Delete />
+                      X
                     </Button>
                   </div>
                   <Stage width={this.getWidth(1)} height={180}>
@@ -332,7 +348,7 @@ class TemplateMenuOptions extends React.Component {
                             // skewX={device.skewX}
                             // skewY={device.skewY}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                     <Layer>
@@ -347,7 +363,7 @@ class TemplateMenuOptions extends React.Component {
                             height={text.height * this.getProportionHeight()}
                             rotation={text.rotation}
                           />
-                        )
+                        );
                       })}
                     </Layer>
                   </Stage>
@@ -355,7 +371,7 @@ class TemplateMenuOptions extends React.Component {
               ))}
         </div>
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = state => ({

@@ -1,10 +1,10 @@
 import React from 'react'
 import './styles.scss'
-import TemplateIcon from './../../../svgs/template.svg'
-import StarIcon from './../../../svgs/ammstar.svg'
-import TextIcon from './../../../svgs/text.svg'
-import ScreensIcon from './../../../svgs/screens.svg'
-import BackgroundIcon from './../../../svgs/background.svg'
+import { ReactComponent as TemplateIcon } from "./../../../svgs/template.svg";
+import { ReactComponent as StarIcon } from "./../../../svgs/ammstar.svg";
+import { ReactComponent as TextIcon } from "./../../../svgs/text.svg";
+import { ReactComponent as ScreensIcon } from "./../../../svgs/screens.svg";
+import { ReactComponent as BackgroundIcon } from "./../../../svgs/background.svg";
 import { connect } from 'react-redux'
 
 import { SELECTED_MODULE } from './../../../common/constants/SelectedModuleConstant'

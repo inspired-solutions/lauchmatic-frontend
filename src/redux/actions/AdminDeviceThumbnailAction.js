@@ -1,5 +1,5 @@
 import AdminDeviceThumbnailTypes from "../types/AdminDeviceThumbnailTypes";
-import deviceThumbnailService from "../../deviceThumbnail.service";
+import deviceThumbnailService from "../../services/deviceThumbnail.service";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

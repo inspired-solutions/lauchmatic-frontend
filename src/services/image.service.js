@@ -14,7 +14,6 @@ function addImage(image) {
   return api
     .post("/api/v1/images/", formData, {
       headers: {
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`,
         "Content-Type": "multipart/form-data"
       }
     })
@@ -23,21 +22,11 @@ function addImage(image) {
 
 function updateImage(image) {
   return api
-    .patch(`/api/v1/images/${image.id}/`, image, {
-      headers: {
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`
-      }
-    })
+    .patch(`/api/v1/images/${image.id}/`, image)
     .then(({ data }) => data);
 }
 function deleteImage(image) {
-  return api
-    .delete(`/api/v1/images/${image.id}/`, {
-      headers: {
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`
-      }
-    })
-    .then(({ data }) => data);
+  return api.delete(`/api/v1/images/${image.id}/`).then(({ data }) => data);
 }
 export default {
   addImage,

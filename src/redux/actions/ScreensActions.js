@@ -1,6 +1,6 @@
 import ScreensTypes from "../types/ScreensTypes";
 import uuid from "uuid/v1";
-import screenService from "../../screen.service";
+import screenService from "../../services/screen.service";
 
 const ScreensActions = {
   addScreenMenu: screen => ({

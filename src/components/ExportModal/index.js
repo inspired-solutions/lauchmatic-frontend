@@ -11,7 +11,7 @@ import {
 import Button from '../Button'
 import Paper from '../Paper'
 import Icon from '../Icon'
-import CloseModalIcon from './../../svgs/close-modal.svg'
+import { ReactComponent as CloseModalIcon } from "./../../svgs/close-modal.svg";
 import classNames from 'classnames'
 import { TEMPLATE_TYPES } from './../../common/constants/TemplateConstant'
 import PropTypes from 'prop-types'

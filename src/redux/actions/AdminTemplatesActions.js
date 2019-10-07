@@ -1,6 +1,6 @@
 import AdminTemplateTypes from "../types/AdminTemplatesTypes";
-import templateService from "../../template.service";
-import textService from "../../text.service";
+import templateService from "../../services/template.service";
+import textService from "../../services/text.service";
 
 const AdminTemplateAction = {
   getAdminTemplates: () => async dispatch => {
@@ -11,7 +11,7 @@ const AdminTemplateAction = {
         ...template,
         devices: template.devices.map(device => ({
           ...device,
-          image: `${process.env.NEXT_PUBLIC_API}${device.image}`,
+          image: `${process.env.REACT_APP_NEXT_PUBLIC_API}${device.image}`,
           left: Number(device.left),
           right: Number(device.right),
           rotation: Number(device.rotation),

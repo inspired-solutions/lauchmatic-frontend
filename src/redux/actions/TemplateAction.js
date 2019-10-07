@@ -1,5 +1,5 @@
 import TemplateTypes from "../types/TemplateTypes";
-import templateService from "../../template.service";
+import templateService from "../../services/template.service";
 import AppTypes from "../types/AppTypes";
 import TextTypes from "../types/TextTypes";
 import { COLOR_FILL_TYPE } from "../../common/constants/BackgroundConstant";
@@ -38,7 +38,7 @@ const TemplateAction = {
         ...template,
         devices: template.devices.map(device => ({
           ...device,
-          image: `${process.env.NEXT_PUBLIC_API}${device.image}`,
+          image: `${process.env.REACT_APP_NEXT_PUBLIC_API}${device.image}`,
           left: Number(device.left),
           right: Number(device.right),
           rotation: Number(device.rotation),

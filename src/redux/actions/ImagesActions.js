@@ -1,7 +1,7 @@
 import ImagesTypes from "../types/ImagesTypes";
 import uuid from "uuid/v1";
 import TextTypes from "../types/TextTypes";
-import imageService from "../../image.service";
+import imageService from "../../services/image.service";
 
 const ImagesActions = {
   addImageMenu: image => ({

@@ -4,8 +4,7 @@ function addDeviceThumbnail(thumbnailDevice) {
   return api
     .post("/api/v1/thumbnails/", thumbnailDevice, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`
+        "Content-Type": "multipart/form-data"
       }
     })
     .then(({ data }) => data);
@@ -13,11 +12,7 @@ function addDeviceThumbnail(thumbnailDevice) {
 
 function getDeviceThumbnails() {
   return api
-    .get("/api/v1/thumbnails", {
-      headers: {
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`
-      }
-    })
+    .get("/api/v1/thumbnails")
     .then(({ data }) => data);
 }
 

@@ -7,7 +7,7 @@ import IText from './../../interfaces/IText'
 import AppActions from './../../redux/actions/AppActions'
 import ImagesActions from './../../redux/actions/ImagesActions'
 import TextActions from './../../redux/actions/TextActions'
-import AddIcon from './../../svgs/add.svg'
+import { ReactComponent as AddIcon } from "./../../svgs/add.svg";
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'

@@ -5,7 +5,7 @@ import { compose } from 'recompose'
 import Select from '../Select'
 import { SCREENS_TYPE } from './../../common/constants/ScreensConstant'
 import Icon from '../Icon'
-import DeviceIcon from './../../svgs/device.svg'
+import { ReactComponent as DeviceIcon } from "./../../svgs/device.svg";
 import ButtonGroup from '../ButtonGroup'
 import ITemplate from './../../interfaces/ITemplate'
 import PropTypes from 'prop-types'

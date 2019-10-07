@@ -1,6 +1,6 @@
 import TextTypes from "../types/TextTypes";
 import ImagesTypes from "../types/ImagesTypes";
-import textService from "../../text.service";
+import textService from "../../services/text.service";
 
 const TextActions = {
   addText: text => async dispatch => {

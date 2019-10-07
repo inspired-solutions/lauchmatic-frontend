@@ -1,0 +1,8 @@
+:root * {
+  box-sizing: border-box !important;
+  font-family: "Poppins", sans-serif;
+  &[tabindex="0"],
+  button {
+    outline: none !important;
+  }
+}

@@ -4,8 +4,7 @@ function addThumbnailDevice(device) {
   return api
     .post("/devices", device, {
       headers: {
-        Authorization: `JWT ${localStorage && localStorage.getItem("token")}`,
-        headers: { "Content-Type": "multipart/form-data" }
+       "Content-Type": "multipart/form-data" 
       }
     })
     .then(({ data }) => data);
