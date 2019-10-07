@@ -54,7 +54,7 @@ function Admin({
   resetDevicesCanvas,
   texts,
   resetText,
-  auth,
+  auth
 }) {
   useEffect(() => {
     getDeviceThumbnails();
@@ -75,11 +75,11 @@ function Admin({
           height: Number(device.height).toFixed(2),
           x: Number(device.x).toFixed(2),
           y: Number(device.y).toFixed(2),
-          rotation: Number(device.rotation).toFixed(2),
-          scaleX: Number(device.scaleX).toFixed(2),
-          scaleY: Number(device.scaleY).toFixed(2),
-          skewX: Number(device.skewX).toFixed(2),
-          skewY: Number(device.skewY).toFixed(2),
+          rotation: Number(device.rotation || 0).toFixed(2),
+          scaleX: Number(device.scaleX || 1).toFixed(2),
+          scaleY: Number(device.scaleY || 1).toFixed(2),
+          skewX: Number(device.skewX || 1).toFixed(2),
+          skewY: Number(device.skewY || 1).toFixed(2),
           right: 0.0 /**this field dont must exist in any model */,
           image: fileHelpers.dataURLtoBlob(device.url)
         })),
@@ -98,7 +98,7 @@ function Admin({
     return (
       <Redirect
         to={{
-          pathname: "/",
+          pathname: "/"
         }}
       />
     );
@@ -232,7 +232,7 @@ const mapStateToProps = state => ({
   screenType: state.adminApp.screenType,
   devicesCanvas: state.adminDevice.listDevicesCanvas,
   texts: state.adminText.list,
-  auth: state.auth,
+  auth: state.auth
 });
 const mapDispatchToProps = {
   setDeviceThumbnail: AdminAppAction.setDeviceThumbnail,
@@ -241,7 +241,7 @@ const mapDispatchToProps = {
   addTemplate: AdminTemplateAction.addTemplate,
   getDeviceThumbnails: AdminDeviceThumbnailAction.getDeviceThumbnails,
   resetDevicesCanvas: AdminDevicesAction.resetDevicesCanvas,
-  resetText: AdminTextAction.resetText,
+  resetText: AdminTextAction.resetText
 };
 
 export default compose(
